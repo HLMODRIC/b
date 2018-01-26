@@ -7,12 +7,14 @@
     <string name="tab_menu_search">查询</string>
 
     <!-- 主页面 -->
-    <string name="home_button_text_1">主页待定</string>
-    <string name="home_button_text_2">主页待定</string>
-    <string name="home_button_text_3">主页待定</string>
-    <string name="home_button_text_4">主页待定</string>
-    <string name="home_button_text_5">主页待定</string>
-    <string name="home_button_text_6">主页待定</string>
+    <string name="home_button_text_1">线路介绍</string>
+    <string name="home_button_text_2">部门介绍</string>
+    <string name="home_button_text_3">公司制度</string>
+    <string name="home_button_text_4">考核条例</string>
+    <string name="home_button_text_5">会议纪要</string>
+    <string name="home_button_text_6">下发文件</string>
+    <string name="home_button_text_7">岗位职责</string>
+    <string name="home_button_text_8">应急预案</string>
 
     <!-- 查询页面 -->
     <string name="search_button_text_1">查询待定</string>
@@ -37,5 +39,8 @@
     <string name="repair_button_text_4">维修待定</string>
     <string name="repair_button_text_5">维修待定</string>
     <string name="repair_button_text_6">维修待定</string>
+
+    <string name="recycler_list_tab_text">标题</string>
+    <string name="content_tab_text">内容</string>
 
 </resources>
