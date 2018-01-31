@@ -51,12 +51,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         fManager = getFragmentManager();
         bindViews();
 
-       /* TheoryListFragment nlFragment = new TheoryListFragment(fManager);
-        FragmentTransaction ft = fManager.beginTransaction();
-        ft.replace(R.id.ly_content, nlFragment);
-        ft.commit();
-    //*/
-
         rg_tab_bar = (RadioGroup) findViewById(R.id.rg_tab_bar);
         rg_tab_bar.setOnCheckedChangeListener(this);
         //获取第一个单选按钮，并设置其为选中状态

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:weightSum="2"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+
+        android:id="@+id/ll_item7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageView
+
+            android:id="@+id/ib_icon7"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@mipmap/home_ib_7"/>
+
+        <TextView
+            android:id="@+id/tv_name7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/home_button_text_7"
+            android:textSize="@dimen/textSize_15"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/div_white"/>
+
+    <LinearLayout
+
+        android:id="@+id/ll_item8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageView
+
+            android:id="@+id/ib_icon8"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@mipmap/home_ib_8"/>
+
+        <TextView
+            android:id="@+id/tv_name8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/home_button_text_8"
+            android:textSize="@dimen/textSize_15"
+            />
+    </LinearLayout>
+</LinearLayout>

@@ -2,13 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_white"
+    android:background="@color/bg_gray"
     tools:context=".Activity.MainActivity">
 
     <RadioGroup
         android:id="@+id/rg_tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="46dp"
         android:layout_alignParentBottom="true"
         android:background="@color/bg_white"
         android:orientation="horizontal">
@@ -16,23 +16,20 @@
         <RadioButton
             android:id="@+id/rb_home"
             style="@style/tab_menu_item"
-            android:drawableTop="@drawable/tab_menu_channel"
-            android:background="@color/transparent"
-            android:text="@string/tab_menu_home" />
-
-        <RadioButton
-            android:id="@+id/rb_repair"
-            style="@style/tab_menu_item"
-            android:drawableTop="@drawable/tab_menu_better"
-            android:background="@color/transparent"
-            android:text="@string/tab_menu_repair" />
+            android:drawableTop="@drawable/tab_menu_home"
+            android:background="@color/transparent"/>
 
         <RadioButton
             android:id="@+id/rb_theory"
             style="@style/tab_menu_item"
-            android:drawableTop="@drawable/tab_menu_message"
-            android:background="@color/transparent"
-            android:text="@string/tab_menu_theory" />
+            android:drawableTop="@drawable/tab_menu_theory"
+            android:background="@color/transparent"/>
+
+        <RadioButton
+            android:id="@+id/rb_repair"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_menu_repair"
+            android:background="@color/transparent"/>
 
 
         <RadioButton
@@ -40,16 +37,16 @@
             style="@style/tab_menu_item"
             android:background="@color/transparent"
             android:drawableTop="@drawable/tab_menu_search"
-            android:text="@string/tab_menu_search"/>
+            />
 
     </RadioGroup>
 
-        <View
+    <View
         android:id="@+id/div_tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="2px"
+        android:layout_height="0.5dp"
         android:layout_above="@id/rg_tab_bar"
-        android:background="@color/div_white" />
+        android:background="@color/div_white"/>
 
     <FrameLayout
         android:id="@+id/main_content"

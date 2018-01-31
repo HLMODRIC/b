@@ -32,6 +32,8 @@ public class TheoryTabFragment extends Fragment {
     private Button listButton4;
     private Button listButton5;
     private Button listButton6;
+    private Button listButton7;
+    private Button listButton8;
     private ImageButton searchButton;
 
     //1.22
@@ -58,6 +60,8 @@ public class TheoryTabFragment extends Fragment {
         listButton4 = (Button) view.findViewById(R.id.theory_bt_4);
         listButton5 = (Button) view.findViewById(R.id.theory_bt_5);
         listButton6 = (Button) view.findViewById(R.id.theory_bt_6);
+        listButton7 = (Button) view.findViewById(R.id.theory_bt_7);
+        listButton8 = (Button) view.findViewById(R.id.theory_bt_8);
         searchButton = (ImageButton) view.findViewById (R.id.search_theory_ib);
          return view;
     }
@@ -67,37 +71,49 @@ public class TheoryTabFragment extends Fragment {
         listButton.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("theory");
+                getData ("select * from theory where id < 100");
             }
         });
         listButton2.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("theory");
+                getData ("select * from theory where id between 100 and 200");
             }
         });
         listButton3.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("theory");
+                getData ("select * from theory where id between 200 and 300");
             }
         });
         listButton4.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("theory");
+                getData ("select * from theory where id between 300 and 400");
             }
         });
         listButton5.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("theory");
+                getData ("select * from theory where id between 400 and 500");
             }
         });
         listButton6.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("theory");
+                getData ("select * from theory where id between 500 and 550");
+            }
+        });
+        listButton7.setOnClickListener(new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                getData ("select * from theory where id between 550 and 600");
+            }
+        });
+        listButton8.setOnClickListener(new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                getData ("select * from theory where id between 600 and 650");
             }
         });
         searchButton.setOnClickListener (new View.OnClickListener () {
@@ -112,21 +128,21 @@ public class TheoryTabFragment extends Fragment {
 
     }
 
-    private void getData(String mData ) {
+    private void getData(String sql) {
         //db数据库
         dbHelper = new MyDBOpenHelper (getActivity ());  //注意：dbHelper的实体化
         //查询数据库
         dbRead = dbHelper.getReadableDatabase ();
-        mCursor = dbRead.query (mData, null, null, null, null, null, null);  //查询所有数据
+        mCursor = dbRead.rawQuery (sql,null);
         datas = new ArrayList<Data> ();
         while (mCursor.moveToNext ()) {
-            //for (int i = 0; i < num; i++) {
             mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
             titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
             contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
             Data data = new Data (mid, titleStr, contentStr);
             datas.add (data);
         }
+        mCursor.close ();
         dbHelper.close ();
         Intent intent=new Intent ();
         intent.setClass(getActivity(), ListActivity.class);

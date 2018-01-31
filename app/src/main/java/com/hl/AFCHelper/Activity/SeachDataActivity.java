@@ -71,22 +71,31 @@ public class SeachDataActivity extends AppCompatActivity {
                         }
                         break;
 
-                    case "search_fragment":
-                        Message = "repair";
+                    case "theory_fragment":
+                        Message = "theory";
                         if (newText != null && newText.length () > 0) {
                             if (newText.equals (oldNewsText) == false) {
-                                getSearchContentData ( "select title from basic where id = ?", newText);
+                                getSearchListData (newText, "select * from " + Message + " where content like ?");
                             }
                         }
                         break;
-                        case "theory_fragment":
-                            Message = "theory";
-                            if (newText != null && newText.length () > 0) {
-                                if (newText.equals (oldNewsText) == false) {
-                                    getSearchListData (newText, "select * from " + Message + " where content like ?");
-                                }
+
+                    case "chs_code_search":
+                        if (newText != null && newText.length () > 0) {
+                            if (newText.equals (oldNewsText) == false) {
+                                getSearchContentData ( "select title from chs_code where id = ?", newText);
                             }
-                            break;
+                        }
+                        break;
+
+                    case "bnr_code_search":
+                        if (newText != null && newText.length () > 3) {
+                            if (newText.equals (oldNewsText) == false) {
+                                getSearchContentData ( "select title from bnr_code where id = ?", newText);
+                            }
+                        }
+                        break;
+
                         default:
                             break;
                 }

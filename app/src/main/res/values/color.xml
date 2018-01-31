@@ -33,6 +33,9 @@
     <color name="app_green">#ff1db9a7</color>
     <color name="app_green_normal">#ff20c9b5</color>
 
+    <color name="interval_color">#ffececec</color>
+    <color name="signed_color">#ff00bb99</color>
+
     <color name="tab_selected">#fb773b</color>
     <color name="tab_normal">#c5c9d0</color>
 

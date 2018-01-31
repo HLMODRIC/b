@@ -17,11 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hl.AFCHelper.Activity.ContentActivity;
+import com.hl.AFCHelper.Activity.ListActivity;
 import com.hl.AFCHelper.ImageViewPager.ImagePagerActivity;
 import com.hl.AFCHelper.R;
+import com.hl.AFCHelper.db.Data;
 import com.hl.AFCHelper.db.MyDBOpenHelper;
 
 import java.util.ArrayList;
@@ -49,12 +52,14 @@ public class HomeTabFragment extends Fragment {
     private ScheduledExecutorService scheduledExecutorService;
     //db数据库
     private FragmentManager fManager;
-    private String datas;
+    private ArrayList<Data> datas;
     private SQLiteDatabase dbRead;
     MyDBOpenHelper dbHelper;
+    String titleStr;
+    String contentStr;
+    int mid;
 
     private Cursor mCursor;
-    private String[] co = {"content"};
 
 
     //****viewpager  四号线图片展播
@@ -80,51 +85,52 @@ public class HomeTabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate (R.layout.fg_home, container, false);
-        ImageButton imageButton = (ImageButton ) view.findViewById (R.id.ib_icon1);
-        ImageButton imageButton2 = (ImageButton ) view.findViewById (R.id.ib_icon2);
-        ImageButton imageButton3 = (ImageButton ) view.findViewById (R.id.ib_icon3);
-        ImageButton imageButton4 = (ImageButton ) view.findViewById (R.id.ib_icon4);
-        ImageButton imageButton5 = (ImageButton ) view.findViewById (R.id.ib_icon5);
-        ImageButton imageButton6 = (ImageButton ) view.findViewById (R.id.ib_icon6);
-        imageButton.setOnClickListener (new View.OnClickListener () {
+        LinearLayout home_item1 = (LinearLayout) view.findViewById (R.id.ll_item1);
+        LinearLayout home_item2 = (LinearLayout) view.findViewById (R.id.ll_item2);
+        LinearLayout home_item3 = (LinearLayout) view.findViewById (R.id.ll_item3);
+        LinearLayout home_item4 = (LinearLayout) view.findViewById (R.id.ll_item4);
+        LinearLayout home_item5 = (LinearLayout) view.findViewById (R.id.ll_item5);
+        LinearLayout home_item6 = (LinearLayout) view.findViewById (R.id.ll_item6);
+        home_item1.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("basic",co,"id = 1");
+                getData ("select * from basic where id < 100");
             }
         });
-        imageButton2.setOnClickListener (new View.OnClickListener () {
+        home_item2.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("basic",co,"id = 2");
+                getData ("select * from basic where id between 100 and 200");
             }
         });
-        imageButton3.setOnClickListener (new View.OnClickListener () {
+        home_item3.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("basic",co,"id = 3");
+                getData ("select * from basic where id between 200 and 300");
             }
         });
-        imageButton4.setOnClickListener (new View.OnClickListener () {
+        home_item4.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("basic",co,"id = 4");
+                getData ("select * from basic where id between 300 and 400");
             }
         });
-        imageButton5.setOnClickListener (new View.OnClickListener () {
+        home_item5.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("basic",co,"id = 5");
+                getData ("select * from basic where id between 400 and 500");
             }
         });
-        imageButton6.setOnClickListener (new View.OnClickListener () {
+        home_item6.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("basic",co,"id = 6");
+                getData ("select * from basic where id between 500 and 600");
             }
         });
         setView ();
         return view;
     }
+
 
     private void setView() {
         mViewPaper = ( ViewPager ) view.findViewById (R.id.home_vp);
@@ -304,21 +310,26 @@ public class HomeTabFragment extends Fragment {
         }
 
         //数据库数据获取
-    private void getData(String table,String[] columns, String selection ) {
+    private void getData(String sql) {
         //db数据库
         dbHelper = new MyDBOpenHelper (getActivity ());  //注意：dbHelper的实体化
         //查询数据库
         dbRead = dbHelper.getReadableDatabase ();
-        mCursor = dbRead.query (table, columns, selection, null, null, null, null);  //查询所有数据
-        if (mCursor.moveToFirst()) {
-            datas = mCursor.getString (mCursor.getColumnIndex ("content"));
-            Log.d ("test",datas);
-            dbHelper.close ();
+        mCursor = dbRead.rawQuery (sql,null);
+        datas = new ArrayList<Data> ();
+        while (mCursor.moveToNext ()) {
+            mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
+            titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
+            contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
+            Data data = new Data (mid, titleStr, contentStr);
+            datas.add (data);
         }
+        mCursor.close ();
+        dbHelper.close ();
         Intent intent=new Intent ();
-        intent.setClass(getActivity(), ContentActivity.class);
+        intent.setClass(getActivity(), ListActivity.class);
         Bundle bundle=new Bundle();
-        bundle.putString ("data",datas);
+        bundle.putSerializable ("data",datas);
         intent.putExtras(bundle);
         startActivity (intent);
     }

@@ -3,8 +3,8 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical">
-
+              android:orientation="vertical"
+              android:background="@color/bg_gray">
 
     <RelativeLayout
         android:id="@+id/ly_top_bar"
@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="@string/app_name"
+            android:text="@string/tab_menu_theory"
             android:textColor="@color/text_topbar"
             android:textSize="18sp" />
 
@@ -36,49 +36,107 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2px"
+            android:layout_height="0.5dp"
             android:layout_alignParentBottom="true"
             android:background="@color/div_white"
             android:id="@+id/view2"/>
 
     </RelativeLayout>
 
-
-
-    <Button
-        android:id="@+id/theory_bt_1"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/theory_button_text_1"/>
+        android:layout_height="70dp"/>
 
-    <Button
-        android:id="@+id/theory_bt_2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/theory_button_text_2"/>
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/bg_common_gray">
 
-    <Button
-        android:id="@+id/theory_bt_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/theory_button_text_3"/>
+        <View
+            android:layout_width="5dp"
+            android:layout_height="35dp"
+            android:background="@color/signed_color" />
 
-    <Button
-        android:id="@+id/theory_bt_4"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:textSize="@dimen/textSize_15"
+            android:text="@string/tab_menu_theory" />
+    </LinearLayout>
+    <include layout="@layout/theory_item_line1"/>
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/theory_button_text_4"/>
+        android:layout_height="1dp"
+        android:background="@color/div_white"/>
 
-    <Button
-        android:id="@+id/theory_bt_5"
+    <include layout="@layout/theory_item_line2"/>
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/theory_button_text_5"/>
+        android:layout_height="1dp"
+        android:background="@color/div_white"/>
 
-    <Button
-        android:id="@+id/theory_bt_6"
+    <include layout="@layout/theory_item_line3"/>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/theory_button_text_6"/>
+        android:layout_height="1dp"
+        android:background="@color/div_white"/>
+
+    <include layout="@layout/theory_item_line4"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/div_white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/bg_common_gray">
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="35dp"
+            android:background="@color/signed_color" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:textSize="@dimen/textSize_15"
+            android:text="@string/tab_menu_repair" />
+    </LinearLayout>
+
+    <include layout="@layout/repair_item_line1"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/div_white"/>
+
+    <include layout="@layout/repair_item_line2"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/div_white"/>
+
+    <include layout="@layout/repair_item_line3"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/div_white"/>
+
+
 
 </LinearLayout>

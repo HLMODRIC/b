@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/bg_gray"
               android:orientation="vertical">
 
 
@@ -19,88 +21,24 @@
             android:gravity="center"
             android:text="@string/app_name"
             android:textColor="@color/text_topbar"
-            android:textSize="18sp" />
+            android:textSize="18sp"/>
 
+        <ImageView
+            android:id="@+id/search_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="#00000000"
+            app:srcCompat="@android:drawable/ic_dialog_info"
+            android:layout_alignParentEnd="true"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:layout_alignParentBottom="true"
-            android:background="@color/div_white" />
 
     </RelativeLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dip" >
+    <include layout="@layout/item_viewpager"/>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/home_vp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="35dip"
-            android:layout_gravity="bottom"
-            android:background="#33000000"
-            android:gravity="center"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="图片标题"
-                android:textColor="@android:color/white" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dip"
-                android:orientation="horizontal" >
-
-                <View
-                    android:id="@+id/dot_0"
-                    android:layout_width="5dip"
-                    android:layout_height="5dip"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginRight="2dip"
-                    android:background="@mipmap/ic_launcher_round"/>
-
-                <View
-                    android:id="@+id/dot_1"
-                    android:layout_width="5dip"
-                    android:layout_height="5dip"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginRight="2dip"
-                    android:background="@mipmap/ic_launcher_round"/>
-                <View
-                    android:id="@+id/dot_2"
-                    android:layout_width="5dip"
-                    android:layout_height="5dip"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginRight="2dip"
-                    android:background="@mipmap/ic_launcher_round"/>
-                <View
-                    android:id="@+id/dot_3"
-                    android:layout_width="5dip"
-                    android:layout_height="5dip"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginRight="2dip"
-                    android:background="@mipmap/ic_launcher_round"/>
-                <View
-                    android:id="@+id/dot_4"
-                    android:layout_width="5dip"
-                    android:layout_height="5dip"
-                    android:layout_marginLeft="2dip"
-                    android:layout_marginRight="2dip"
-                    android:background="@mipmap/ic_launcher_round"/>
-
-            </LinearLayout>
-        </LinearLayout>
-    </FrameLayout>
     <LinearLayout
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -109,8 +47,4 @@
         <include layout="@layout/home_item_line2"/>
 
     </LinearLayout>
-
-
-
-
 </LinearLayout>

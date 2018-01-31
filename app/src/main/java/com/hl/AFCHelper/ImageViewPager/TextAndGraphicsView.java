@@ -27,7 +27,7 @@ import java.util.List;
 public class TextAndGraphicsView extends LinearLayout {
 
     public static final String TEXT_TAG =  "[#TEXT#]";//文字标识
-    public static final String IMAGE_LOCAL_TAG = "[#IMAGE_LOCAL#]";//本地图片标识(assets目录下)
+    public static final String IMAGE_LOCAL_TAG = "[#IMAGE#]";//本地图片标识(assets目录下)
 
     private Context context;
     private String[] mData;
@@ -85,11 +85,6 @@ public class TextAndGraphicsView extends LinearLayout {
 
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 Bitmap bitmap = BitmapFactory.decodeStream(is, null, options);
-                int bitmapWidth = bitmap.getWidth();
-                int bitmapHeight = bitmap.getHeight();
-                Toast.makeText (context, String.valueOf (bitmapHeight),Toast.LENGTH_SHORT).show ();
-                Toast.makeText (context, String.valueOf (bitmapWidth),Toast.LENGTH_SHORT).show ();
-                Toast.makeText (context, String.valueOf (screenWidth),Toast.LENGTH_SHORT).show ();
                 iv.setImageBitmap(bitmap);
                 iv.setAdjustViewBounds (true);
                 Drawable drawable = new BitmapDrawable(bitmap);

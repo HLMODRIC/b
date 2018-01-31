@@ -34,14 +34,12 @@ public class RepairTabFragment extends Fragment  {
     private ImageButton searchButton;
     private final static String MESSAGE_REPAIR = "repair_fragment";
 
-    //1.22
-    private FragmentManager fManager;
-    private ArrayList<Data> datas;
+    private ArrayList<Data> datas = null;
     private SQLiteDatabase dbRead;
     MyDBOpenHelper dbHelper;
-    String titleStr;
-    String contentStr;
-    int mid;
+    String titleStr = null;
+    String contentStr = null;
+    int mid = 0;
     private Cursor mCursor;
 
     public RepairTabFragment() {
@@ -55,8 +53,8 @@ public class RepairTabFragment extends Fragment  {
         listButton2 = (Button) view.findViewById(R.id.repair_bt_2);
         listButton3 = (Button) view.findViewById(R.id.repair_bt_3);
         listButton4 = (Button) view.findViewById(R.id.repair_bt_4);
-        listButton5 = (Button) view.findViewById(R.id.repair_bt_5);
-        listButton6 = (Button) view.findViewById(R.id.repair_bt_6);
+        //listButton5 = (Button) view.findViewById(R.id.repair_bt_5);
+        //listButton6 = (Button) view.findViewById(R.id.repair_bt_6);
         searchButton = (ImageButton) view.findViewById (R.id.search_repair_ib);
 
 
@@ -71,39 +69,39 @@ public class RepairTabFragment extends Fragment  {
         listButton.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("repair");
+                getData ("select * from repair where id < 100");
             }
         });
         listButton2.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("repair");
+                getData ("select * from repair where id between 100 and 200");
             }
         });
         listButton3.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("repair");
+                getData ("select * from repair where id between 200 and 300");
             }
         });
         listButton4.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("repair");
+                getData ("select * from repair where id between 300 and 400");
             }
         });
-        listButton5.setOnClickListener(new View.OnClickListener () {
+        /*listButton5.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("repair");
+                getData ("select * from repair where id between 400 and 500");
             }
         });
         listButton6.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                getData ("repair");
+                getData ("select * from repair where id between 500 and 600");
             }
-        });
+        });*/
         searchButton.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
@@ -115,21 +113,21 @@ public class RepairTabFragment extends Fragment  {
         });
     }
 
-    private void getData(String mData ) {
+    private void getData(String sql) {
         //db数据库
         dbHelper = new MyDBOpenHelper (getActivity ());  //注意：dbHelper的实体化
         //查询数据库
         dbRead = dbHelper.getReadableDatabase ();
-        mCursor = dbRead.query (mData, null, null, null, null, null, null);  //查询所有数据
-                datas = new ArrayList<Data> ();
+        mCursor = dbRead.rawQuery (sql,null);
+        datas = new ArrayList<Data> ();
         while (mCursor.moveToNext ()) {
-            //for (int i = 0; i < num; i++) {
             mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
             titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
             contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
             Data data = new Data (mid, titleStr, contentStr);
             datas.add (data);
         }
+        mCursor.close ();
         dbHelper.close ();
         Intent intent=new Intent ();
         intent.setClass(getActivity(), ListActivity.class);
@@ -137,6 +135,5 @@ public class RepairTabFragment extends Fragment  {
         bundle.putSerializable ("data",datas);
         intent.putExtras(bundle);
         startActivity (intent);
-
     }
 }
