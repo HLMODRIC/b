@@ -3,10 +3,11 @@
               android:orientation="horizontal"
               android:weightSum="3"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:baselineAligned="false">
 
     <LinearLayout
-
+        android:paddingTop="5dp"
         android:id="@+id/ll_item4"
         android:gravity="center"
         android:orientation="vertical"
@@ -14,22 +15,20 @@
         android:layout_weight="1"
         android:layout_height="wrap_content">
 
-        <ImageView
-
-            android:id="@+id/ib_icon4"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@mipmap/home_ib_4"/>
-
         <TextView
+            android:paddingTop="2dp"
             android:id="@+id/tv_name4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/home_button_text_5" />
+            android:textSize="@dimen/textSize_13"
+            android:text="@string/home_button_text_4"
+            android:textColor="@color/bg_black"
+            android:drawableTop="@mipmap/home_iv_4"/>
     </LinearLayout>
 
     <LinearLayout
+        android:paddingTop="5dp"
         android:id="@+id/ll_item5"
         android:gravity="center"
         android:orientation="vertical"
@@ -37,21 +36,20 @@
         android:layout_weight="1"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ib_icon5"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@mipmap/home_ib_4" />
-
         <TextView
+            android:paddingTop="2dp"
             android:id="@+id/tv_name5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/home_button_text_6" />
+            android:textSize="@dimen/textSize_13"
+            android:text="@string/home_button_text_5"
+            android:textColor="@color/bg_black"
+            android:drawableTop="@mipmap/home_iv_5"/>
     </LinearLayout>
 
     <LinearLayout
+        android:paddingTop="5dp"
         android:id="@+id/ll_item6"
         android:gravity="center"
         android:orientation="vertical"
@@ -59,19 +57,16 @@
         android:layout_weight="1"
         android:layout_height="wrap_content">
 
-        <ImageView
-
-            android:id="@+id/ib_icon6"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@mipmap/home_ib_5" />
-
         <TextView
+            android:paddingTop="2dp"
             android:id="@+id/tv_name6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/home_button_text_8" />
+            android:textSize="@dimen/textSize_13"
+            android:text="@string/home_button_text_6"
+            android:textColor="@color/bg_black"
+            android:drawableTop="@mipmap/home_iv_6"/>
     </LinearLayout>
 
 

@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hl.AFCHelper.Activity.ContentActivity;
+import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.db.Data;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.util.ArrayList;
 
@@ -43,6 +45,13 @@ public class SearchListFragment extends Fragment {
 
         return view;
     }
+
+    @Override public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
+    }
+
     private void updateUI() {
         mAdapter = new DataAdapter (datas);
         mCrimeRecyclerView.setAdapter(mAdapter);

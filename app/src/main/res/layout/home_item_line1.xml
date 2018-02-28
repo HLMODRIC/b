@@ -3,78 +3,70 @@
               android:orientation="horizontal"
               android:weightSum="3"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content" android:baselineAligned="false">
 
     <LinearLayout
 
         android:id="@+id/ll_item1"
         android:gravity="center"
-        android:padding="5dp"
+        android:padding="2.5dp"
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content">
 
-        <ImageView
-
-            android:id="@+id/ib_icon1"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@mipmap/home_ib_1"/>
-
         <TextView
             android:id="@+id/tv_name1"
+            android:paddingTop="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/home_button_text_1"
-         />
+            android:textSize="@dimen/textSize_13"
+            android:textColor="@color/bg_black"
+            android:drawableTop="@mipmap/home_iv_1"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_item2"
         android:gravity="center"
-        android:padding="5dp"
+        android:padding="2.5dp"
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ib_icon2"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@mipmap/home_ib_2" />
-
         <TextView
             android:id="@+id/tv_name2"
+            android:paddingTop="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/home_button_text_2" />
+            android:text="@string/home_button_text_2"
+            android:textSize="@dimen/textSize_13"
+            android:textColor="@color/bg_black"
+            android:drawableTop="@mipmap/home_iv_2"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_item3"
         android:gravity="center"
-        android:padding="5dp"
+        android:padding="2.5dp"
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ib_icon3"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@mipmap/home_ib_3"/>
-
         <TextView
+            android:paddingTop="2dp"
             android:id="@+id/tv_name3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/home_button_text_3" />
+            android:text="@string/home_button_text_3"
+            android:textSize="@dimen/textSize_13"
+            android:textColor="@color/bg_black"
+            android:drawableTop="@mipmap/home_iv_3"/>
     </LinearLayout>
 
 

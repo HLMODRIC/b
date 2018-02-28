@@ -3,20 +3,26 @@
 <RelativeLayout
     style="@style/me_common_item_relativeLayout_style"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <ImageView
-        android:id="@+id/setting_item_iv_icon"
-        style="@style/me_common_item_icon_imageView_style"
-        android:src="@mipmap/item_list_text"/>
+
     <TextView
         android:id="@+id/txt_item_title"
-        android:text="1"
-        style="@style/me_common_item_title_textView_style"
-        android:layout_toRightOf="@+id/setting_item_iv_icon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:drawableLeft="@mipmap/item_list_text"
+        android:drawableStart="@mipmap/item_list_text"
+        android:text="@string/tab_menu_home"
+        android:textSize="@dimen/textSize_15"
+        android:textColor="@color/bg_black"
+        android:drawableRight="@mipmap/item_list_right"
+        android:drawableEnd="@mipmap/item_list_right"
         />
-    <ImageView
-        android:id="@+id/setting_item_iv_arrow_right"
-        style="@style/me_common_item_arrow_right_imageView_style"/>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:background="@color/div_white"/>
 </RelativeLayout>
 
 

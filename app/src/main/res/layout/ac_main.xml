@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_gray"
     tools:context=".Activity.MainActivity">
 
     <RadioGroup
@@ -17,27 +16,31 @@
             android:id="@+id/rb_home"
             style="@style/tab_menu_item"
             android:drawableTop="@drawable/tab_menu_home"
-            android:background="@color/transparent"/>
+            android:background="@color/transparent"
+            android:text="@string/tab_menu_home"/>
 
         <RadioButton
             android:id="@+id/rb_theory"
             style="@style/tab_menu_item"
             android:drawableTop="@drawable/tab_menu_theory"
-            android:background="@color/transparent"/>
-
-        <RadioButton
-            android:id="@+id/rb_repair"
-            style="@style/tab_menu_item"
-            android:drawableTop="@drawable/tab_menu_repair"
-            android:background="@color/transparent"/>
-
+            android:background="@color/transparent"
+            android:text="@string/tab_menu_theory"
+            />
 
         <RadioButton
             android:id="@+id/rb_search"
             style="@style/tab_menu_item"
             android:background="@color/transparent"
             android:drawableTop="@drawable/tab_menu_search"
+            android:text="@string/tab_menu_search"
             />
+
+        <RadioButton
+            android:id="@+id/rb_setting"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_menu_repair"
+            android:background="@color/transparent"
+            android:text="@string/tab_menu_setting"/>
 
     </RadioGroup>
 

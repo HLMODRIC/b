@@ -8,12 +8,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 
+import com.hl.AFCHelper.ListFragment.ListFragment;
+import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.SearchFragment.SearchListFragment;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.db.Data;
 import com.hl.AFCHelper.db.MyDBOpenHelper;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.util.ArrayList;
 
@@ -32,18 +37,27 @@ public class SeachDataActivity extends AppCompatActivity {
     private Cursor mCursor;
     private String oldNewsText = null;
     private String getMessage;
-    private String Message;
+    private ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.ac_seach_data);
+
+        backButton = ( ImageButton ) findViewById (R.id.search_back);
+        backButton.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                finish ();
+            }
+        });
         SearchView searchView = ( SearchView ) findViewById (R.id.search_data_sv);
+
         final Intent intent = getIntent ();
         getMessage = intent.getStringExtra ("message");
-        Log.d ("111114",getMessage);
+        datas = ( ArrayList<Data> ) intent.getSerializableExtra ("data");
 
-        searchView.setOnCloseListener(new SearchView.OnCloseListener () {
+        searchView.setOnCloseListener (new SearchView.OnCloseListener () {
             @Override
             public boolean onClose() {
                 return true;
@@ -61,53 +75,87 @@ public class SeachDataActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 switch (intent.getStringExtra ("message")) {
-
-                    case "repair_fragment":
-                        Message = "basic";
-                        if (newText != null && newText.length () > 0) {
-                            if (newText.equals (oldNewsText) == false) {
-                                getSearchListData (newText, "select * from " + Message + " where content like ?");
-                            }
-                        }
-                        break;
-
                     case "theory_fragment":
-                        Message = "theory";
                         if (newText != null && newText.length () > 0) {
-                            if (newText.equals (oldNewsText) == false) {
-                                getSearchListData (newText, "select * from " + Message + " where content like ?");
+                            if (!newText.equals (oldNewsText)) {
+                                getSearchListData (newText, "select * from theory where content like ?");
                             }
                         }
                         break;
 
                     case "chs_code_search":
                         if (newText != null && newText.length () > 0) {
-                            if (newText.equals (oldNewsText) == false) {
-                                getSearchContentData ( "select title from chs_code where id = ?", newText);
+                            if (!newText.equals (oldNewsText)) {
+                                getSearchListData (newText, "select * from chs_code where content like ?");
                             }
                         }
                         break;
-
                     case "bnr_code_search":
-                        if (newText != null && newText.length () > 3) {
-                            if (newText.equals (oldNewsText) == false) {
-                                getSearchContentData ( "select title from bnr_code where id = ?", newText);
+                        if (newText != null && newText.length () > 0) {
+                            if (!newText.equals (oldNewsText)) {
+                                getSearchListData (newText, "select * from bnr_code where content like ?");
                             }
                         }
                         break;
 
-                        default:
-                            break;
-                }
+                    case "mbc_code_search":
+                        if (newText != null && newText.length () > 0) {
+                            if (!newText.equals (oldNewsText)) {
+                                getSearchListData (newText, "select * from mbc_code where content like ?");
+                            }
+                        }
+                        break;
+                    case "card_code_search":
+                        if (newText != null && newText.length () > 0) {
+                            if (!newText.equals (oldNewsText)) {
+                                getSearchListData (newText, "select * from card_code where content like ?");
+                            }
+                        }
+                        break;
+                    case "ip_code_search":
+                        if (newText != null && newText.length () > 0) {
+                            if (!newText.equals (oldNewsText)) {
+                                getSearchListData (newText, "select * from ip_code where content like ?");
+                            }
+                        }
+                        break;
+                    case "screw_code_search":
+                        if (newText != null && newText.length () > 0) {
+                            if (!newText.equals (oldNewsText)) {
+                                getSearchListData (newText, "select * from screw_code where content like ?");
+                            }
+                        }
+                        break;
 
+                    default:
+                        break;
+                }
                 return false;
+
             }
         });
 
         FragmentManager fragmentManager = getFragmentManager ();         //获取FragmentManger对象
         Fragment fragment = fragmentManager.findFragmentById (R.id.search_list);
+        if (fragment == null) {
+            Bundle bundle = new Bundle ();
+            bundle.putSerializable ("data", datas);
+            fragment = new SearchListFragment (fragmentManager);
+            fragment.setArguments (bundle);
+            fragmentManager.beginTransaction ()
+                    .replace (R.id.search_list, fragment)
+                    .commit ();
 
+        }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = MyApplication.getRefWatcher(this);//1
+        refWatcher.watch(this);
+    }
+
     private void getSearchListData(String newText,String sql ) {
         //db数据库
         dbHelper = new MyDBOpenHelper (getBaseContext ());  //注意：dbHelper的实体化
@@ -123,6 +171,7 @@ public class SeachDataActivity extends AppCompatActivity {
             Data data = new Data (mid, titleStr, contentStr);
             datas.add (data);
         }
+
             // FragmentManager fragmentManager = getFragmentManager (); //获取FragmentManger对象
             Fragment fragment = new SearchListFragment (getFragmentManager ());
             Bundle bundle = new Bundle ();
@@ -132,26 +181,5 @@ public class SeachDataActivity extends AppCompatActivity {
                     .replace (R.id.search_list, fragment)
                     .commit ();
     }
-
-    private void getSearchContentData(String sql,String id ) {
-        //db数据库
-        dbHelper = new MyDBOpenHelper (getBaseContext ());  //注意：dbHelper的实体化
-        //查询数据库
-        dbRead = dbHelper.getReadableDatabase ();
-        mCursor = dbRead.rawQuery (sql, new String[] {id});  //查询所有数据
-        while (mCursor.moveToNext ()) {
-            StringData = mCursor.getString (mCursor.getColumnIndex ("title"));
-            Log.d ("111115",StringData);
-            Log.d ("111115", String.valueOf (StringData.length ()));
-        }
-        if (StringData != null && StringData.length () > 0 ) {
-            Intent intent = new Intent (SeachDataActivity.this, ContentActivity.class);
-            Bundle bundle = new Bundle ();
-            bundle.putString ("data", StringData);
-            intent.putExtras (bundle);
-            startActivity (intent);
-        }
-    }
-
-    }
+}
 

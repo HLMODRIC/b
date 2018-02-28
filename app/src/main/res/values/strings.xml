@@ -2,48 +2,62 @@
     <!-- 主模块 4个菜单页 -->
     <string name="app_name">AFC维护助手</string>
     <string name="tab_menu_home">首页</string>
-    <string name="tab_menu_theory">理论知识</string>
-    <string name="tab_menu_search">信息查询</string>
+    <string name="tab_menu_theory">知识</string>
+    <string name="tab_menu_search">查询</string>
     <string name="tab_menu_setting">设置</string>
 
     <!-- 主页面 -->
     <string name="home_button_text_1">线路信息</string>
     <string name="home_button_text_2">部门信息</string>
     <string name="home_button_text_3">公司制度</string>
-    <string name="home_button_text_4">考核条例</string>
-    <string name="home_button_text_5">会议纪要</string>
-    <string name="home_button_text_6">下发文件</string>
+    <string name="home_button_text_4">会议纪要</string>
+    <string name="home_button_text_5">下发文件</string>
+    <string name="home_button_text_6">培训内容</string>
     <string name="home_button_text_7">岗位职责</string>
-    <string name="home_button_text_8">应急预案</string>
+    <string name="home_button_text_8">考核条例</string>
+    <string name="home_button_text_9">应急预案</string>
+    <string name="home_viewpager_text">图片标题</string>
 
     <!-- 查询页面 -->
+    <string name="search_tab_text_1">TVM相关</string>
+    <string name="search_tab_text_2">GATE相关</string>
+    <string name="search_tab_text_3">车站相关</string>
+    <string name="search_tab_text_4">维修相关</string>
     <string name="search_button_text_1">CHS代码查询</string>
     <string name="search_button_text_2">BNR代码查询</string>
     <string name="search_button_text_3">MBC110代码查询</string>
     <string name="search_button_text_4">刷卡代码查询</string>
     <string name="search_button_text_5">车站IP查询</string>
     <string name="search_button_text_6">螺丝查询</string>
+    <string name="search_button_text_7">查询一览</string>
 
-    <!-- 理论页面 -->
+    <!-- 知识页面 -->
+    <string name="theory_tab_text_1">理论知识</string>
+    <string name="theory_tab_text_2">维护知识</string>
     <string name="theory_button_text_1">AFC系统</string>
     <string name="theory_button_text_2">TVM系统</string>
     <string name="theory_button_text_3">GATE系统</string>
     <string name="theory_button_text_4">POST系统</string>
-    <string name="theory_button_text_5">机房工作站设备</string>
-    <string name="theory_button_text_6">软件通信</string>
-    <string name="theory_button_text_7">待定</string>
+    <string name="theory_button_text_5">软件通信</string>
+    <string name="theory_button_text_6">TVM各模块详细</string>
+    <string name="theory_button_text_7">GATE各模块详细</string>
     <string name="theory_button_text_8">其他</string>
 
 
-    <!-- 维修页面 -->
+    <!-- 设置页面 -->
     <string name="repair_button_text_1">TVM故障</string>
     <string name="repair_button_text_2">GATE故障</string>
     <string name="repair_button_text_3">POST故障</string>
     <string name="repair_button_text_4">其他故障</string>
     <string name="repair_button_text_5">保养相关</string>
     <string name="repair_button_text_6">维修待定</string>
+    <string name="user_name">用户名</string>
+    <string name="user_id">账号:100001</string>
+    <string name="user_password">密码:100001</string>
 
-    <string name="recycler_list_tab_text">标题</string>
+    <!-- 设置页面 -->
     <string name="content_tab_text">内容</string>
+    <string name="recycler_list_tab_text">标题</string>
+
 
 </resources>

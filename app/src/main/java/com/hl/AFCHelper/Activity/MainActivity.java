@@ -3,6 +3,7 @@ package com.hl.AFCHelper.Activity;
 
 import android.app.*;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
@@ -11,12 +12,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.TabFragment.HomeTabFragment;
-import com.hl.AFCHelper.TabFragment.RepairTabFragment;
+import com.hl.AFCHelper.TabFragment.SettingTabFragment;
 import com.hl.AFCHelper.TabFragment.SearchTabFragment;
 import com.hl.AFCHelper.TabFragment.TheoryTabFragment;
 import com.hl.AFCHelper.db.DBManager;
+import com.squareup.leakcanary.RefWatcher;
 
 
 /**
@@ -27,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     //控件
     private RadioGroup rg_tab_bar;
     private RadioButton rb_home;
+    private RadioButton rb_theory;
+    private RadioButton rb_search;
+    private RadioButton rb_setting;
     private TextView txt_title;
     private FrameLayout fl_content;
     //上下文
@@ -35,9 +41,9 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private long exitTime = 0;
     //Fragment Object
     private HomeTabFragment    mHomeTabFragment;
-    private RepairTabFragment  mRepairTabFragment;
+    private SettingTabFragment mSettingTabFragment;
     private TheoryTabFragment  mTheoryTabFragment;
-    private SearchTabFragment mSettingTabFragment;
+    private SearchTabFragment mSearchTabFragment;
     private FragmentManager fManager;
 
 
@@ -55,12 +61,25 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         rg_tab_bar.setOnCheckedChangeListener(this);
         //获取第一个单选按钮，并设置其为选中状态
         rb_home = (RadioButton) findViewById(R.id.rb_home);
+        rb_theory = (RadioButton) findViewById(R.id.rb_theory);
+        rb_search = (RadioButton) findViewById(R.id.rb_search);
+        rb_setting = (RadioButton) findViewById(R.id.rb_setting);
         rb_home.setChecked(true);
 
-        //进行数据库传输
-        DBManager dbManager = new DBManager ();
-        dbManager.openDatabase (this);
 
+
+    }
+    @Override
+    protected void onStart() {
+        //进行数据库传输
+        super.onStart ();
+        DBManager.openDatabase (this);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = MyApplication.getRefWatcher(this);//1
+        refWatcher.watch(this);
     }
 
     //
@@ -110,20 +129,20 @@ public void onBackPressed() {
                     fTransaction.show(mTheoryTabFragment);
                 }
                 break;
-            case R.id.rb_repair:
-                if(mRepairTabFragment == null){
-                    mRepairTabFragment = new RepairTabFragment ();
-                    fTransaction.add(R.id.main_content,mRepairTabFragment);
+            case R.id.rb_setting:
+                if(mSettingTabFragment == null){
+                    mSettingTabFragment = new SettingTabFragment ();
+                    fTransaction.add(R.id.main_content, mSettingTabFragment);
                 }else{
-                    fTransaction.show(mRepairTabFragment);
+                    fTransaction.show(mSettingTabFragment);
                 }
                 break;
             case R.id.rb_search:
-                if(mSettingTabFragment == null){
-                    mSettingTabFragment = new SearchTabFragment ();
-                    fTransaction.add(R.id.main_content,mSettingTabFragment);
+                if(mSearchTabFragment == null){
+                    mSearchTabFragment = new SearchTabFragment ();
+                    fTransaction.add(R.id.main_content,mSearchTabFragment);
                 }else{
-                    fTransaction.show(mSettingTabFragment);
+                    fTransaction.show(mSearchTabFragment);
                 }
                 break;
         }
@@ -134,7 +153,7 @@ public void onBackPressed() {
     private void hideAllFragment(FragmentTransaction fragmentTransaction){
         if(mHomeTabFragment != null)fragmentTransaction.hide(mHomeTabFragment);
         if(mTheoryTabFragment != null)fragmentTransaction.hide(mTheoryTabFragment);
-        if(mRepairTabFragment != null)fragmentTransaction.hide(mRepairTabFragment);
+        if(mSearchTabFragment != null)fragmentTransaction.hide(mSearchTabFragment);
         if(mSettingTabFragment != null)fragmentTransaction.hide(mSettingTabFragment);
     }
 

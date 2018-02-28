@@ -1,11 +1,13 @@
 package com.hl.AFCHelper.TabFragment;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -20,12 +22,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hl.AFCHelper.Activity.ContentActivity;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.hl.AFCHelper.Activity.ListActivity;
 import com.hl.AFCHelper.ImageViewPager.ImagePagerActivity;
+import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.db.Data;
 import com.hl.AFCHelper.db.MyDBOpenHelper;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +60,7 @@ public class HomeTabFragment extends Fragment {
     private FragmentManager fManager;
     private ArrayList<Data> datas;
     private SQLiteDatabase dbRead;
+    private String tableName = null;
     MyDBOpenHelper dbHelper;
     String titleStr;
     String contentStr;
@@ -66,20 +73,18 @@ public class HomeTabFragment extends Fragment {
     //记录上一次点的位置
     private int oldPosition = 0;
     //存放图片的id
-    private int[] imageIds = new int[]{
-            R.drawable.test,
-            R.drawable.test,
-            R.drawable.test,
-            R.drawable.test,
-            R.drawable.test
+    private String[] imageUrl = new String[]{
+            "file:///android_asset/advert/viewpager_1.jpg",
+            "file:///android_asset/advert/viewpager_1.jpg",
+            "file:///android_asset/advert/viewpager_1.jpg",
+            "file:///android_asset/advert/viewpager_1.jpg"
     };
     //存放图片的标题
     private String[] titles = new String[]{
             "轮播1",
             "轮播2",
             "轮播3",
-            "轮播4",
-            "轮播5"};
+            "轮播4"};
 
     @Nullable
     @Override
@@ -94,36 +99,42 @@ public class HomeTabFragment extends Fragment {
         home_item1.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_1);
                 getData ("select * from basic where id < 100");
             }
         });
         home_item2.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_2);
                 getData ("select * from basic where id between 100 and 200");
             }
         });
         home_item3.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_3);
                 getData ("select * from basic where id between 200 and 300");
             }
         });
         home_item4.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_4);
                 getData ("select * from basic where id between 300 and 400");
             }
         });
         home_item5.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_5);
                 getData ("select * from basic where id between 400 and 500");
             }
         });
         home_item6.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_6);
                 getData ("select * from basic where id between 500 and 600");
             }
         });
@@ -137,9 +148,20 @@ public class HomeTabFragment extends Fragment {
 
         //显示的图片
         images = new ArrayList<ImageView> ();
-        for (int i = 0; i < imageIds.length; i++) {
+        for (int i = 0; i < imageUrl.length; i++) {
             ImageView imageView = new ImageView (getActivity ());
-            imageView.setBackgroundResource (imageIds[i]);
+            imageView.setAdjustViewBounds (true);
+            imageView.setScaleType (ImageView.ScaleType.FIT_XY);
+
+            RequestOptions options = new RequestOptions ()
+                    .diskCacheStrategy (DiskCacheStrategy.ALL)
+                    .error(R.mipmap.load_error);
+
+            Glide.with(getActivity ())
+                    .load(imageUrl[i])
+                    .apply (options)
+                    .thumbnail(0.1f)//先显示缩略图  缩略图为原图的1/10
+                    .into(imageView);
             images.add (imageView);
         }
         //图片展播 图片底部显示的小点
@@ -148,14 +170,7 @@ public class HomeTabFragment extends Fragment {
         dots.add (view.findViewById (R.id.dot_1));
         dots.add (view.findViewById (R.id.dot_2));
         dots.add (view.findViewById (R.id.dot_3));
-        dots.add (view.findViewById (R.id.dot_4));
-        //图片展播  图片位置
-        ListPhotos = new ArrayList<>();
-        ListPhotos.add ("file:///android_asset/advert/01.jpg");
-        ListPhotos.add ("file:///android_asset/advert/02.png");
-        ListPhotos.add ("file:///android_asset/advert/01.jpg");
-        ListPhotos.add ("file:///android_asset/advert/02.png");
-        ListPhotos.add ("file:///android_asset/advert/01.jpg");
+
 
 
         title = ( TextView ) view.findViewById (R.id.title1);
@@ -166,8 +181,8 @@ public class HomeTabFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 title.setText (titles[position]);
-                dots.get (position).setBackgroundResource (R.drawable.test);
-                dots.get (oldPosition).setBackgroundResource (R.drawable.test);
+                dots.get (position).setBackgroundResource (R.drawable.bannertrue);
+                dots.get (oldPosition).setBackgroundResource (R.drawable.bannerfalse);
                 oldPosition = position;
                 currentItem = position;
             }
@@ -211,6 +226,14 @@ public class HomeTabFragment extends Fragment {
 
             // TODO Auto-generated method stub
             final Intent intent = new Intent(getActivity (), ImagePagerActivity.class);
+
+            //图片展播  图片位置
+            ListPhotos = new ArrayList<>();
+            ListPhotos.add ("file:///android_asset/advert/viewpager_1.jpg");
+            ListPhotos.add ("file:///android_asset/advert/viewpager_2.jpg");
+            ListPhotos.add ("file:///android_asset/advert/viewpager_3.jpg");
+            ListPhotos.add ("file:///android_asset/advert/viewpager_4.jpg");
+
             switch (position) {
                 case 0:   //图片1
                     images.get (0).setOnClickListener (new View.OnClickListener () {
@@ -256,6 +279,7 @@ public class HomeTabFragment extends Fragment {
                         break;
             }
 
+
             view.addView (images.get (position));
             return images.get (position);
         }
@@ -271,10 +295,16 @@ public class HomeTabFragment extends Fragment {
             scheduledExecutorService = Executors.newSingleThreadScheduledExecutor ();
             scheduledExecutorService.scheduleWithFixedDelay (
                     new ViewPageTask (),
-                    2,
-                    2,
+                    5,
+                    5,
                     TimeUnit.SECONDS);
         }
+
+    @Override public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
+    }
 
         /**
          * 图片轮播任务
@@ -285,7 +315,7 @@ public class HomeTabFragment extends Fragment {
 
             @Override
             public void run() {
-                currentItem = (currentItem + 1) % imageIds.length;
+                currentItem = (currentItem + 1) % imageUrl.length;
                 mHandler.sendEmptyMessage (0);
             }
         }
@@ -293,6 +323,7 @@ public class HomeTabFragment extends Fragment {
         /**
          * 接收子线程传递过来的数据
          */
+        @SuppressLint("HandlerLeak")
         private Handler mHandler = new Handler () {
             public void handleMessage(android.os.Message msg) {
                 mViewPaper.setCurrentItem (currentItem);
@@ -329,6 +360,7 @@ public class HomeTabFragment extends Fragment {
         Intent intent=new Intent ();
         intent.setClass(getActivity(), ListActivity.class);
         Bundle bundle=new Bundle();
+        bundle.putString ("table_name",tableName);
         bundle.putSerializable ("data",datas);
         intent.putExtras(bundle);
         startActivity (intent);

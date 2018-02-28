@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:background="@color/bg_gray">
+              android:orientation="vertical">
 
 
     <RelativeLayout
@@ -30,10 +29,26 @@
             android:background="@color/div_white" />
 
     </RelativeLayout>
-
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"/>
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/bg_common_gray">
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="30dp"
+            android:background="@color/signed_color" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="5dp"
+            android:textSize="@dimen/textSize_15"
+            android:text="@string/search_tab_text_1" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/search_bt_1"
@@ -53,6 +68,27 @@
         android:gravity="center"
         android:text="@string/search_button_text_2"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/bg_common_gray">
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="30dp"
+            android:background="@color/signed_color" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="5dp"
+            android:textSize="@dimen/textSize_15"
+            android:text="@string/search_tab_text_2" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/search_bt_3"
         android:layout_width="match_parent"
@@ -71,6 +107,27 @@
         android:gravity="center"
         android:text="@string/search_button_text_4"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/bg_common_gray">
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="30dp"
+            android:background="@color/signed_color" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="5dp"
+            android:textSize="@dimen/textSize_15"
+            android:text="@string/search_tab_text_3" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/search_bt_5"
         android:layout_width="match_parent"
@@ -78,7 +135,29 @@
         android:layout_margin="5dip"
         android:background="@drawable/btn_bottom_confirm_bg"
         android:gravity="center"
+        android:textSize="@dimen/textSize_15"
         android:text="@string/search_button_text_5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/bg_common_gray">
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="30dp"
+            android:background="@color/signed_color" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="5dp"
+            android:textSize="@dimen/textSize_15"
+            android:text="@string/search_tab_text_4" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/search_bt_6"

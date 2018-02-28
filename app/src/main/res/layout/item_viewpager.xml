@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     android:layout_width="match_parent"
-    android:layout_height="200dip"
+    android:layout_height="150dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <android.support.v4.view.ViewPager
@@ -21,7 +21,7 @@
             android:id="@+id/title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="图片标题"
+            android:text="@string/home_viewpager_text"
             android:textColor="@android:color/white" />
 
         <LinearLayout
@@ -36,7 +36,7 @@
                 android:layout_height="5dip"
                 android:layout_marginLeft="2dip"
                 android:layout_marginRight="2dip"
-                android:background="@mipmap/ic_launcher_round"/>
+                android:background="@drawable/bannertrue"/>
 
             <View
                 android:id="@+id/dot_1"
@@ -44,28 +44,22 @@
                 android:layout_height="5dip"
                 android:layout_marginLeft="2dip"
                 android:layout_marginRight="2dip"
-                android:background="@mipmap/ic_launcher_round"/>
+                android:background="@drawable/bannerfalse"/>
             <View
                 android:id="@+id/dot_2"
                 android:layout_width="5dip"
                 android:layout_height="5dip"
                 android:layout_marginLeft="2dip"
                 android:layout_marginRight="2dip"
-                android:background="@mipmap/ic_launcher_round"/>
+                android:background="@drawable/bannerfalse"/>
             <View
                 android:id="@+id/dot_3"
                 android:layout_width="5dip"
                 android:layout_height="5dip"
                 android:layout_marginLeft="2dip"
                 android:layout_marginRight="2dip"
-                android:background="@mipmap/ic_launcher_round"/>
-            <View
-                android:id="@+id/dot_4"
-                android:layout_width="5dip"
-                android:layout_height="5dip"
-                android:layout_marginLeft="2dip"
-                android:layout_marginRight="2dip"
-                android:background="@mipmap/ic_launcher_round"/>
+                android:background="@drawable/bannerfalse"/>
+
 
         </LinearLayout>
     </LinearLayout>
