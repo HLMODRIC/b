@@ -1,16 +1,31 @@
-package com.hl.AFCHelper.Fragment;
+package com.hl.AFCHelper.TabFragment;
 
-
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+
+import com.hl.AFCHelper.Activity.ListActivity;
+import com.hl.AFCHelper.Activity.SeachDataActivity;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
+import com.hl.AFCHelper.db.Data;
+import com.hl.AFCHelper.db.MyDBOpenHelper;
 import com.squareup.leakcanary.RefWatcher;
 
-public class SettingTabFragment extends Fragment {
+import java.util.ArrayList;
+
+/**
+ * Created by Jay on 2015/8/28 0028.
+ */
+public class SettingTabFragment extends Fragment  {
 
 
     @Override

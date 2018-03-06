@@ -1,4 +1,4 @@
-package com.hl.AFCHelper.Adapter;
+package com.hl.AFCHelper.ImageViewPager;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

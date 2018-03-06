@@ -1,4 +1,4 @@
-package com.hl.AFCHelper.Activity;
+package com.hl.AFCHelper.ImageViewPager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,7 +19,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
-import com.hl.AFCHelper.Adapter.HackyViewPager;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.squareup.leakcanary.RefWatcher;
@@ -66,7 +66,7 @@ public class ImagePagerActivity extends Activity {
 
         getIntentData();
 
-        ImageAdapter mAdapter = new ImageAdapter(getApplicationContext ());
+        ImageAdapter mAdapter = new ImageAdapter(this);
         mAdapter.setDatas(imgUrls);
         mAdapter.setImageSize(imageSize);
         viewPager.setAdapter(mAdapter);
@@ -198,7 +198,7 @@ public class ImagePagerActivity extends Activity {
                         .diskCacheStrategy (DiskCacheStrategy.ALL)
                         .error(R.mipmap.load_error);
 
-                Glide.with(getApplicationContext ())
+                Glide.with(context)
                         .load(imgurl)
                         .apply (options)
                         .thumbnail(0.1f)//先显示缩略图  缩略图为原图的1/10
