@@ -5,142 +5,22 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/ly_top_bar"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/mTabLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/bg_topbar">
+        android:layout_height="40dp"
+        app:tabSelectedTextColor="@color/md_blue_500"
+        app:tabIndicatorColor="@color/md_blue_500"
+        >
 
-        <TextView
-            android:id="@+id/txt_topbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="@string/tab_menu_theory"
-            android:textColor="@color/text_topbar"
-            android:textSize="18sp" />
+    </android.support.design.widget.TabLayout>
 
-        <ImageButton
-            android:id="@+id/search_theory_ib"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_above="@+id/view2"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="#00000000"
-            app:srcCompat="@android:drawable/ic_menu_search"
-            android:contentDescription="@string/app_name"/>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/div_white"
-            android:id="@+id/view2"/>
-
-    </RelativeLayout>
-
-    <ScrollView
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mViewPager1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    </android.support.v4.view.ViewPager>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:background="@color/bg_common_gray">
-
-        <View
-            android:layout_width="5dp"
-            android:layout_height="30dp"
-            android:background="@color/signed_color" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="5dp"
-            android:text="@string/theory_tab_text_1"
-            android:textColor="@color/bg_black"
-            android:textSize="@dimen/textSize_15"/>
-    </LinearLayout>
-    <include layout="@layout/theory_item_line1"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/div_white"/>
-
-    <include layout="@layout/theory_item_line2"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/div_white"/>
-
-    <include layout="@layout/theory_item_line3"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/div_white"/>
-
-    <include layout="@layout/theory_item_line4"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/div_white"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:background="@color/bg_common_gray">
-
-        <View
-            android:layout_width="5dp"
-            android:layout_height="30dp"
-            android:background="@color/signed_color" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="5dp"
-            android:textSize="@dimen/textSize_15"
-            android:text="@string/theory_tab_text_2" />
-    </LinearLayout>
-
-    <include layout="@layout/repair_item_line1"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/div_white"/>
-
-    <include layout="@layout/repair_item_line2"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/div_white"/>
-
-    <include layout="@layout/repair_item_line3"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/div_white"/>
-
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>

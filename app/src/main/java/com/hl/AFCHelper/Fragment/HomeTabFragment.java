@@ -1,38 +1,32 @@
-package com.hl.AFCHelper.TabFragment;
+package com.hl.AFCHelper.Fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.hl.AFCHelper.Activity.ListActivity;
-import com.hl.AFCHelper.ImageViewPager.ImagePagerActivity;
+import com.hl.AFCHelper.Activity.ImagePagerActivity;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
-import com.hl.AFCHelper.db.Data;
+import com.hl.AFCHelper.Until.SearchDataHelper;
+import com.hl.AFCHelper.Bean.Data;
 import com.hl.AFCHelper.db.MyDBOpenHelper;
 import com.squareup.leakcanary.RefWatcher;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -42,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 2018/1/23
  * 主页
- * 具有图片展播，搜索和四号线工作介绍
+ *
  *
  */
 public class HomeTabFragment extends Fragment {
@@ -51,103 +45,69 @@ public class HomeTabFragment extends Fragment {
     private List<ImageView> images;
     private List<View> dots;
     private int currentItem;
-    private Context mContext;
     private List<String> ListPhotos;
     private TextView title;
-    private ViewPagerAdapter madapter;
     private ScheduledExecutorService scheduledExecutorService;
     //db数据库
-    private FragmentManager fManager;
-    private ArrayList<Data> datas;
-    private SQLiteDatabase dbRead;
-    private String tableName = null;
-    MyDBOpenHelper dbHelper;
-    String titleStr;
-    String contentStr;
-    int mid;
-
-    private Cursor mCursor;
+    private String tableName;
+    private String[] imageUrl;
+    private String[] titles;
 
 
     //****viewpager  四号线图片展播
     //记录上一次点的位置
     private int oldPosition = 0;
     //存放图片的id
-    private String[] imageUrl = new String[]{
-            "file:///android_asset/advert/viewpager_1.jpg",
-            "file:///android_asset/advert/viewpager_1.jpg",
-            "file:///android_asset/advert/viewpager_1.jpg",
-            "file:///android_asset/advert/viewpager_1.jpg"
-    };
-    //存放图片的标题
-    private String[] titles = new String[]{
-            "轮播1",
-            "轮播2",
-            "轮播3",
-            "轮播4"};
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate (R.layout.fg_home, container, false);
-        LinearLayout home_item1 = (LinearLayout) view.findViewById (R.id.ll_item1);
-        LinearLayout home_item2 = (LinearLayout) view.findViewById (R.id.ll_item2);
-        LinearLayout home_item3 = (LinearLayout) view.findViewById (R.id.ll_item3);
-        LinearLayout home_item4 = (LinearLayout) view.findViewById (R.id.ll_item4);
-        LinearLayout home_item5 = (LinearLayout) view.findViewById (R.id.ll_item5);
-        LinearLayout home_item6 = (LinearLayout) view.findViewById (R.id.ll_item6);
-        home_item1.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                tableName = getResources ().getString (R.string.home_button_text_1);
-                getData ("select * from basic where id < 100");
-            }
-        });
-        home_item2.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                tableName = getResources ().getString (R.string.home_button_text_2);
-                getData ("select * from basic where id between 100 and 200");
-            }
-        });
-        home_item3.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                tableName = getResources ().getString (R.string.home_button_text_3);
-                getData ("select * from basic where id between 200 and 300");
-            }
-        });
-        home_item4.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                tableName = getResources ().getString (R.string.home_button_text_4);
-                getData ("select * from basic where id between 300 and 400");
-            }
-        });
-        home_item5.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                tableName = getResources ().getString (R.string.home_button_text_5);
-                getData ("select * from basic where id between 400 and 500");
-            }
-        });
-        home_item6.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                tableName = getResources ().getString (R.string.home_button_text_6);
-                getData ("select * from basic where id between 500 and 600");
-            }
-        });
-        setView ();
+        //初始化布局,数据
+        initData ();
+        initView ();
         return view;
     }
 
+    /**
+     * 初始化数据
+     */
+    private void initData() {
+          imageUrl = new String[]{
+                "file:///android_asset/advert/viewpager_1.jpg",
+                "file:///android_asset/advert/viewpager_1.jpg",
+                "file:///android_asset/advert/viewpager_1.jpg",
+                "file:///android_asset/advert/viewpager_1.jpg"
+        };
+        //存放图片的标题
+         titles = new String[]{
+                "轮播1", "轮播2", "轮播3", "轮播4"};
+        //图片展播  图片位置
+        ListPhotos = new ArrayList<>();
+        ListPhotos.add ("file:///android_asset/advert/viewpager_1.jpg");
+        ListPhotos.add ("file:///android_asset/advert/viewpager_2.jpg");
+        ListPhotos.add ("file:///android_asset/advert/viewpager_3.jpg");
+        ListPhotos.add ("file:///android_asset/advert/viewpager_4.jpg");
 
-    private void setView() {
-        mViewPaper = ( ViewPager ) view.findViewById (R.id.home_vp);
+    }
+
+    /**
+     * 初始化布局
+     */
+    private void initView() {
+        mViewPaper = view.findViewById (R.id.home_vp);
+        title = view.findViewById (R.id.vp_title);
+        title.setText (titles[0]);
+
+        LinearLayout home_item1 = view.findViewById (R.id.ll_item1);
+        LinearLayout home_item2 = view.findViewById (R.id.ll_item2);
+        LinearLayout home_item3 = view.findViewById (R.id.ll_item3);
+        LinearLayout home_item4 = view.findViewById (R.id.ll_item4);
+        LinearLayout home_item5 = view.findViewById (R.id.ll_item5);
+        LinearLayout home_item6 = view.findViewById (R.id.ll_item6);
 
         //显示的图片
-        images = new ArrayList<ImageView> ();
+        images = new ArrayList<> ();
         for (int i = 0; i < imageUrl.length; i++) {
             ImageView imageView = new ImageView (getActivity ());
             imageView.setAdjustViewBounds (true);
@@ -160,24 +120,19 @@ public class HomeTabFragment extends Fragment {
             Glide.with(getActivity ())
                     .load(imageUrl[i])
                     .apply (options)
-                    .thumbnail(0.1f)//先显示缩略图  缩略图为原图的1/10
                     .into(imageView);
             images.add (imageView);
         }
         //图片展播 图片底部显示的小点
-        dots = new ArrayList<View> ();
+        dots = new ArrayList<> ();
         dots.add (view.findViewById (R.id.dot_0));
         dots.add (view.findViewById (R.id.dot_1));
         dots.add (view.findViewById (R.id.dot_2));
         dots.add (view.findViewById (R.id.dot_3));
 
-
-
-        title = ( TextView ) view.findViewById (R.id.title1);
-        title.setText (titles[0]);
-        madapter = new ViewPagerAdapter ();
+        ViewPagerAdapter madapter = new ViewPagerAdapter ();
         mViewPaper.setAdapter (madapter);
-        mViewPaper.setOnPageChangeListener (new ViewPager.OnPageChangeListener () {
+        mViewPaper.addOnPageChangeListener(new ViewPager.OnPageChangeListener () {
             @Override
             public void onPageSelected(int position) {
                 title.setText (titles[position]);
@@ -195,6 +150,50 @@ public class HomeTabFragment extends Fragment {
             @Override
             public void onPageScrollStateChanged(int arg0) {
 
+            }
+        });
+
+        final SearchDataHelper searchDataHelper = new SearchDataHelper ();
+        home_item1.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_1);
+                getData (searchDataHelper.ShowData (tableName));
+            }
+        });
+        home_item2.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_2);
+                getData (searchDataHelper.ShowData (tableName));
+            }
+        });
+        home_item3.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_3);
+                getData (searchDataHelper.ShowData (tableName));
+            }
+        });
+        home_item4.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_4);
+                getData (searchDataHelper.ShowData (tableName));
+            }
+        });
+        home_item5.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_5);
+                getData (searchDataHelper.ShowData (tableName));
+            }
+        });
+        home_item6.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_6);
+                getData (searchDataHelper.ShowData (tableName));
             }
         });
     }
@@ -225,15 +224,6 @@ public class HomeTabFragment extends Fragment {
         public Object instantiateItem(ViewGroup view, final int position) {
 
             // TODO Auto-generated method stub
-            final Intent intent = new Intent(getActivity (), ImagePagerActivity.class);
-
-            //图片展播  图片位置
-            ListPhotos = new ArrayList<>();
-            ListPhotos.add ("file:///android_asset/advert/viewpager_1.jpg");
-            ListPhotos.add ("file:///android_asset/advert/viewpager_2.jpg");
-            ListPhotos.add ("file:///android_asset/advert/viewpager_3.jpg");
-            ListPhotos.add ("file:///android_asset/advert/viewpager_4.jpg");
-
             switch (position) {
                 case 0:   //图片1
                     images.get (0).setOnClickListener (new View.OnClickListener () {
@@ -343,26 +333,27 @@ public class HomeTabFragment extends Fragment {
         //数据库数据获取
     private void getData(String sql) {
         //db数据库
-        dbHelper = new MyDBOpenHelper (getActivity ());  //注意：dbHelper的实体化
+        MyDBOpenHelper dbHelper = new MyDBOpenHelper (getActivity ());
         //查询数据库
-        dbRead = dbHelper.getReadableDatabase ();
-        mCursor = dbRead.rawQuery (sql,null);
-        datas = new ArrayList<Data> ();
-        while (mCursor.moveToNext ()) {
-            mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
-            titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
-            contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
+        SQLiteDatabase dbRead = dbHelper.getReadableDatabase ();
+        Cursor cursor = dbRead.rawQuery (sql, null);
+        ArrayList<Data> datas = new ArrayList<> ();
+        while (cursor.moveToNext ()) {
+            int mid = cursor.getInt (cursor.getColumnIndex ("id"));
+            String titleStr = cursor.getString (cursor.getColumnIndex ("title"));
+            String contentStr = cursor.getString (cursor.getColumnIndex ("content"));
             Data data = new Data (mid, titleStr, contentStr);
             datas.add (data);
         }
-        mCursor.close ();
+        cursor.close ();
         dbHelper.close ();
-        Intent intent=new Intent ();
-        intent.setClass(getActivity(), ListActivity.class);
+        dbRead.close ();
+        Intent intent=new Intent (getActivity (),ListActivity.class);
         Bundle bundle=new Bundle();
         bundle.putString ("table_name",tableName);
-        bundle.putSerializable ("data",datas);
+        bundle.putParcelableArrayList ("data", datas);
         intent.putExtras(bundle);
+        bundle.clear ();
         startActivity (intent);
     }
 
