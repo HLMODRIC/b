@@ -1,52 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:background="@color/bg_white"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              tools:context="com.hl.AFCHelper.Activity.ContentActivity"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="@color/bg_white">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_content"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/bg_topbar">
-
-        <ImageButton
-            android:id="@+id/content_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:background="#00000000"
-            android:src="@mipmap/item_back"
-            android:contentDescription="@string/app_name"/>
-
+        android:layout_height="45dp"
+        android:background="@color/md_blue_500"
+        app:navigationIcon="@mipmap/item_back"
+        app:navigationContentDescription="@string/app_name"
+        >
         <TextView
-            android:id="@+id/txt_topbar_content"
-            android:layout_width="match_parent"
+            android:id="@+id/toolbar_content_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
             android:text="@string/content_tab_text"
-            android:textColor="@color/bg_black"
-            android:textSize="18sp" />
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_gravity="center"/>
+    </android.support.v7.widget.Toolbar>
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/div_white" />
-
-    </RelativeLayout>
-
-    <ScrollView
-        android:id="@+id/content_sv"
-        android:background="@color/read"
+     <br.tiagohm.markdownview.MarkdownView
+        android:id="@+id/markdown_view"
+        app:escapeHtml="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:scrollbars="none"/>
-</LinearLayout>
+        android:layout_below="@+id/toolbar_content"/>
+</RelativeLayout>

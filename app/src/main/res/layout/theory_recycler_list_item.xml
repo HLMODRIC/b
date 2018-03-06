@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout
-    style="@style/me_common_item_relativeLayout_style"
+    android:layout_height="55dp"
+    android:layout_width="match_parent"
+    android:background="@drawable/list_view_item_click"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView

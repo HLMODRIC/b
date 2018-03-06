@@ -25,10 +25,7 @@
                   android:configChanges="orientation|screenSize">
         </activity>
         <activity android:theme="@style/AppTheme"
-            android:name="com.hl.AFCHelper.ImageViewPager.ImagePagerActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity
-            android:name="com.hl.AFCHelper.Activity.SeachDataActivity"
+            android:name="com.hl.AFCHelper.Activity.ImagePagerActivity"
             android:configChanges="orientation|screenSize"/>
 
     </application>
