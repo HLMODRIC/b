@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import br.tiagohm.markdownview.MarkdownView;
+import br.tiagohm.markdownview.css.ExternalStyleSheet;
 import br.tiagohm.markdownview.css.InternalStyleSheet;
 import br.tiagohm.markdownview.css.styles.Github;
 
@@ -120,17 +121,18 @@ public class ContentActivity extends AppCompatActivity implements View.OnTouchLi
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface", "ClickableViewAccessibility"})
     private void initWebView() {
         InternalStyleSheet css = new Github();
-        css.addRule("body", "line-height: 1.6", "padding: 0px");
-        css.addRule(".scrollup", "width: 40px", "height: 40px",
-                "position: fixed", "bottom: 15px", "right: 15px", "visibility: hidden",
-                "display: flex", "align-items: center", "justify-content: center",
-                "margin: 0 !important", "line-height: 70px",
-                "box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28)",
-                "border-radius: 50%", "color: #fff", "padding: 5px");
+        css.addRule("body",  "padding: 0px");
+        css.addRule(".scrollup", "width: 40px", "height: 40px","background-color: #2196F3","bottom: 25px", "right: 25px");
+        css.addRule ("h1","font-weight: 700");
+        css.addRule ("h2","font-weight: 700");
+        css.addRule ("h3","font-weight: 700");
+        css.addRule ("h4","font-weight: 700");
+        css.addRule ("h5","font-weight: 700");
+        css.addRule ("h6","font-weight: 700");
         mMarkdownView.addStyleSheet(css);
         DataTest dataTest = new DataTest ();
 
-        mMarkdownView.loadMarkdown(dataTest.getString());
+        mMarkdownView.loadMarkdown(content);
 
         mMarkdownView.setWebViewClient(new WebViewClient (){
             @Override

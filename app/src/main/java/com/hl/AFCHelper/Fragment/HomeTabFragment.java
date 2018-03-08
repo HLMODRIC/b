@@ -105,6 +105,9 @@ public class HomeTabFragment extends Fragment {
         LinearLayout home_item4 = view.findViewById (R.id.ll_item4);
         LinearLayout home_item5 = view.findViewById (R.id.ll_item5);
         LinearLayout home_item6 = view.findViewById (R.id.ll_item6);
+        LinearLayout home_item7 = view.findViewById (R.id.ll_item7);
+        LinearLayout home_item8 = view.findViewById (R.id.ll_item8);
+        LinearLayout home_item9 = view.findViewById (R.id.ll_item9);
 
         //显示的图片
         images = new ArrayList<> ();
@@ -193,6 +196,27 @@ public class HomeTabFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tableName = getResources ().getString (R.string.home_button_text_6);
+                getData (searchDataHelper.ShowData (tableName));
+            }
+        });
+        home_item7.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_7);
+                getData (searchDataHelper.ShowData (tableName));
+            }
+        });
+        home_item8.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_8);
+                getData (searchDataHelper.ShowData (tableName));
+            }
+        });
+        home_item9.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                tableName = getResources ().getString (R.string.home_button_text_9);
                 getData (searchDataHelper.ShowData (tableName));
             }
         });

@@ -68,7 +68,7 @@ public class VideoListFragment extends Fragment {
                 Bundle bundle=new Bundle();
                 getTabData (mData.get (position).getNew_content ());
                 bundle.putSerializable ("data",mList);
-                bundle.putString ("table_name",titleStr);
+                bundle.putString ("table_name",mData.get (position).getNew_title ());
                 intent.putExtras(bundle);
                 bundle.clear ();
                 startActivity(intent);
