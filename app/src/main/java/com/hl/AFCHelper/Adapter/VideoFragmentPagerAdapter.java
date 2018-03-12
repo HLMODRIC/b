@@ -10,11 +10,11 @@ import java.util.List;
  * Created by huanglei on 2018/3/6.
  */
 
-public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-    private String[] mTitles = new String[]{"理论","维护","视频"};
+public class VideoFragmentPagerAdapter extends FragmentPagerAdapter {
+    private String[] mTitles = new String[]{"TVM","GATE","POST","其他"};
     private List<Fragment> fragments;
 
-    public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public VideoFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments=fragments;
     }

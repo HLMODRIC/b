@@ -5,7 +5,14 @@
               android:orientation="vertical">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="25dp"
@@ -152,5 +159,6 @@
         android:background="@drawable/btn_bottom_confirm_bg"
         android:gravity="center"
         android:text="@string/search_button_text_6"/>
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

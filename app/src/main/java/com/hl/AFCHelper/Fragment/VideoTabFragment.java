@@ -7,12 +7,15 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.hl.AFCHelper.Adapter.TheoryFragmentPagerAdapter;
+import com.hl.AFCHelper.Adapter.VideoFragmentPagerAdapter;
 import com.hl.AFCHelper.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TheoryTabFragment extends Fragment {
+public class VideoTabFragment extends Fragment {
     private View view;
 
     @Override
@@ -33,11 +36,13 @@ public class TheoryTabFragment extends Fragment {
         ViewPager viewPager = view.findViewById (R.id.mViewPager1);
         TabLayout tabLayout = view.findViewById (R.id.mTabLayout);
         List<Fragment> fragments = new ArrayList<> ();
-        fragments.add(new TheoryListFragment ());
-        fragments.add(new RepairListFragment ());
+        fragments.add(new TvmListFragment ());
+        fragments.add(new GateListFragment ());
+        fragments.add (new PostListFragment ());
+        fragments.add (new OtherListFragment ());
 
         //这里注意的是，因为我是在fragment中创建MyFragmentPagerAdapter，所以要传getChildFragmentManager()
-        viewPager.setAdapter(new TheoryFragmentPagerAdapter (getChildFragmentManager (), fragments));
+        viewPager.setAdapter(new VideoFragmentPagerAdapter (getChildFragmentManager (), fragments));
         //在设置viewpager页面滑动监听时，创建TabLayout的滑动监听
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setupWithViewPager (viewPager);

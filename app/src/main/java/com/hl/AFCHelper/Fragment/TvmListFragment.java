@@ -17,12 +17,12 @@ import com.hl.AFCHelper.Adapter.ListDataAdapter;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.Bean.Data;
-import com.hl.AFCHelper.db.MyDBOpenHelper;
+import com.hl.AFCHelper.Bean.db.MyDBOpenHelper;
 import com.squareup.leakcanary.RefWatcher;
 
 import java.util.ArrayList;
 
-public class VideoListFragment extends Fragment {
+public class TvmListFragment extends Fragment {
 
     private ArrayList<Data> mData;
     private ArrayList<Data> mList;

@@ -4,11 +4,21 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
 
 
-    <include layout="@layout/item_viewpager"/>
-
-    <LinearLayout
+        <LinearLayout
         android:paddingTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,5 +36,7 @@
     </LinearLayout>
 
     <include layout="@layout/home_item_line3"/>
+    </LinearLayout>
+</ScrollView>
 
 </LinearLayout>

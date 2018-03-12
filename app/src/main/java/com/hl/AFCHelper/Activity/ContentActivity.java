@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -23,12 +22,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import br.tiagohm.markdownview.MarkdownView;
-import br.tiagohm.markdownview.css.ExternalStyleSheet;
 import br.tiagohm.markdownview.css.InternalStyleSheet;
 import br.tiagohm.markdownview.css.styles.Github;
 
 @SuppressLint("JavascriptInterface")
-public class ContentActivity extends AppCompatActivity implements View.OnTouchListener {
+public class ContentActivity extends BaseActivity implements View.OnTouchListener {
     private MarkdownView mMarkdownView;
     private List<String> imgUrlList = null;
     private ImagePagerActivity.ImageSize imageSize;
@@ -36,16 +34,7 @@ public class ContentActivity extends AppCompatActivity implements View.OnTouchLi
     private String content;
     private String title;
 
-    //Fragment创建
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate (savedInstanceState);
-        setContentView (R.layout.ac_content);
-        //初始化数据，布局，WebView
-        initData ();
-        initView ();
-        initWebView ();
-    }
+
 
     //后退键监听
     @Override
@@ -64,6 +53,18 @@ public class ContentActivity extends AppCompatActivity implements View.OnTouchLi
         super.onDestroy();
         RefWatcher refWatcher = MyApplication.getRefWatcher(this);//
         refWatcher.watch(this);
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.ac_content;
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar ();
+        mImmersionBar.titleBar (R.id.toolbar_content).init ();
+
     }
 
     //监测WebView图片点击事件
@@ -91,7 +92,8 @@ public class ContentActivity extends AppCompatActivity implements View.OnTouchLi
     /**
      * 初始化数据
      */
-    private void initData() {
+    @Override
+    protected void initData() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
@@ -104,7 +106,8 @@ public class ContentActivity extends AppCompatActivity implements View.OnTouchLi
     /**
      * 初始化布局
      */
-    private void initView() {
+    @Override
+    protected void initView() {
         Toolbar toolbar = findViewById (R.id.toolbar_content);
         TextView textView = findViewById (R.id.toolbar_content_title);
         mMarkdownView = findViewById(R.id.markdown_view);
@@ -118,8 +121,9 @@ public class ContentActivity extends AppCompatActivity implements View.OnTouchLi
     /**
      * 初始化WebView的配置
      */
+    @Override
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface", "ClickableViewAccessibility"})
-    private void initWebView() {
+    protected void initWebView() {
         InternalStyleSheet css = new Github();
         css.addRule("body",  "padding: 0px");
         css.addRule(".scrollup", "width: 40px", "height: 40px","background-color: #2196F3","bottom: 25px", "right: 25px");

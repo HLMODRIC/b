@@ -19,6 +19,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.gyf.barlibrary.ImmersionBar;
 import com.hl.AFCHelper.Adapter.HackyViewPager;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
@@ -57,6 +58,8 @@ public class ImagePagerActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ImmersionBar mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar.init();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_imagepager);
         overridePendingTransition(fading_out, fading_in);

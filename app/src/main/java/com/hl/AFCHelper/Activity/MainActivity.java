@@ -1,152 +1,211 @@
 package com.hl.AFCHelper.Activity;
 
-import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.hl.AFCHelper.MyApplication;
-import com.hl.AFCHelper.R;
+
+import com.hl.AFCHelper.Bean.db.DBManager;
 import com.hl.AFCHelper.Fragment.HomeTabFragment;
-import com.hl.AFCHelper.Fragment.SettingTabFragment;
 import com.hl.AFCHelper.Fragment.SearchTabFragment;
 import com.hl.AFCHelper.Fragment.TheoryTabFragment;
-import com.hl.AFCHelper.db.DBManager;
+import com.hl.AFCHelper.Fragment.TvmListFragment;
+import com.hl.AFCHelper.Fragment.VideoTabFragment;
+import com.hl.AFCHelper.MyApplication;
+import com.hl.AFCHelper.R;
+import com.hl.AFCHelper.UI.BottomBar;
+import com.hl.AFCHelper.UI.BottomBarTab;
 import com.squareup.leakcanary.RefWatcher;
 
-public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
-    //TextView标题
-    private TextView toolbar_title;
+import butterknife.BindView;
+
+public class MainActivity extends BaseActivity {
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.main_content)
+    FrameLayout mMainContent;
+    @BindView(R.id.nav_view)
+    NavigationView mNavView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @BindView(R.id.toolbar_title)
+    TextView mToolbarTitle;
+    @BindView(R.id.bottomBar)
+    BottomBar mBottomBar;
+
     //设置退出时间
     private long exitTime = 0;
-    //Fragment Object
-    private HomeTabFragment    mHomeTabFragment;
-    private SettingTabFragment mSettingTabFragment;
-    private TheoryTabFragment  mTheoryTabFragment;
+    //Fragment
+    private HomeTabFragment mHomeTabFragment;
+    private VideoTabFragment mVideoTabFragment;
+    private TheoryTabFragment mTheoryTabFragment;
     private SearchTabFragment mSearchTabFragment;
     private FragmentManager fManager;
-    //Toolbar相关
-    private Toolbar mToolbar;
+    //
+    public static final int FIRST = 0;
+    public static final int SECOND = 1;
+    public static final int THIRD = 2;
+    public static final int FOUR = 3;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.ac_main);
-        setSupportActionBar(mToolbar);
-        fManager = getSupportFragmentManager ();
-        //加载布局
-        initView ();
+    protected void initData() {
+        super.initData ();
         //数据库操作
         DBManager.openDatabase (getApplicationContext ());
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        RefWatcher refWatcher = MyApplication.getRefWatcher(getApplicationContext ());
-        refWatcher.watch(this);
+    protected boolean isImmersionBarEnabled() {
+        return super.isImmersionBarEnabled ();
     }
-
-    /**
-     * 初始化布局
-     */
-    private void initView() {
-        //FrameLayout fl_content = findViewById (R.id.main_content);
-        //Toolbar
-        mToolbar = findViewById(R.id.toolbar);
-        toolbar_title = findViewById (R.id.toolbar_title);
-        //生成选项菜单
-        mToolbar.inflateMenu(R.menu.tab_menu);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish ();
-            }
-        });
-        //RadioGroup
-        RadioGroup rg_tab_bar = findViewById (R.id.rg_tab_bar);
-        rg_tab_bar.setOnCheckedChangeListener(this);
-        //获取第一个单选按钮，并设置其为选中状态
-        RadioButton rb_home = findViewById (R.id.rb_home);
-        rb_home.setChecked(true);
-    }
-
-
-//点击回退键的处理：判断Fragment栈中是否有Fragment
-//没，双击退出程序，否则像是Toast提示
-//有，popBackStack弹出栈
-@Override
-public void onBackPressed() {
-    if (fManager.getBackStackEntryCount() == 0) {
-        if ((System.currentTimeMillis() - exitTime) > 2000) {
-            Toast.makeText(getApplicationContext(), "再按一次退出程序",
-                    Toast.LENGTH_SHORT).show();
-            exitTime = System.currentTimeMillis();
-        } else {
-            super.onBackPressed();
-            System.exit(0);
-        }
-    } else {
-        fManager.popBackStack();
-    }
-}
-//
 
     @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        FragmentTransaction fTransaction = fManager.beginTransaction();
-        hideAllFragment(fTransaction);
-        switch (checkedId){
-            case R.id.rb_home:
-                toolbar_title.setText (getResources ().getText (R.string.app_name));
-                if(mHomeTabFragment == null){
-                    mHomeTabFragment = new HomeTabFragment ();
-                    fTransaction.add(R.id.main_content,mHomeTabFragment);
-                }else{
-                    fTransaction.show(mHomeTabFragment);
-                }
-                break;
-            case R.id.rb_theory:
-                toolbar_title.setText (getResources ().getText (R.string.tab_menu_theory));
-                if(mTheoryTabFragment == null){
-                    mTheoryTabFragment = new TheoryTabFragment ();
-                    fTransaction.add(R.id.main_content,mTheoryTabFragment);
-                }else{
-                    fTransaction.show(mTheoryTabFragment);
-                }
-                break;
-            case R.id.rb_setting:
-                toolbar_title.setText (getResources ().getText (R.string.tab_menu_setting));
-                if(mSettingTabFragment == null){
-                    mSettingTabFragment = new SettingTabFragment ();
-                    fTransaction.add(R.id.main_content, mSettingTabFragment);
-                }else{
-                    fTransaction.show(mSettingTabFragment);
-                }
-                break;
-            case R.id.rb_search:
-                toolbar_title.setText (getResources ().getText (R.string.tab_menu_search));
-                if(mSearchTabFragment == null){
-                    mSearchTabFragment = new SearchTabFragment ();
-                    fTransaction.add(R.id.main_content,mSearchTabFragment);
-                }else{
-                    fTransaction.show(mSearchTabFragment);
-                }
+    protected void initView() {
+        //Fragment
+        fManager = getSupportFragmentManager ();
+        selectedFragment(0);
+        //Toolbar
+        mToolbar.setTitle ("");
+        setSupportActionBar (mToolbar);
+        //DrawerLayout
+        mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        //NavigationView
+        mNavView.setNavigationItemSelectedListener (new NavigationView.OnNavigationItemSelectedListener () {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                mDrawerLayout.closeDrawers ();
+                return true;
+            }
+        });
+        //
+        mBottomBar
+                .addItem(new BottomBarTab(this, R.mipmap.tab_home,getString(R.string.tab_menu_home)))
+                .addItem(new BottomBarTab (this, R.mipmap.tab_theory,getString(R.string.tab_menu_theory)))
+                .addItem(new BottomBarTab(this, R.mipmap.tab_video,getString(R.string.tab_menu_video)))
+                .addItem(new BottomBarTab(this, R.mipmap.tab_search,getString(R.string.tab_menu_search)));
+
+        mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position, int prePosition) {
+               selectedFragment (position);
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+            }
+
+
+            @Override
+            public void onTabReselected(int position) {
+            }
+        });
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar ();
+        mImmersionBar.titleBar (R.id.toolbar).init ();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy ();
+        RefWatcher refWatcher = MyApplication.getRefWatcher (getApplicationContext ());
+        refWatcher.watch (this);
+    }
+
+    @Override
+    protected int setLayoutId() {
+        return R.layout.ac_main;
+    }
+
+    //后退键监听
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId ()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer (GravityCompat.START);
                 break;
         }
-        fTransaction.commit();
+        return super.onOptionsItemSelected (item);
+    }
+
+    //点击回退键的处理：判断Fragment栈中是否有Fragment
+//没，双击退出程序，否则像是Toast提示
+//有，popBackStack弹出栈
+    @Override
+    public void onBackPressed() {
+        if (fManager.getBackStackEntryCount () == 0) {
+            if ((System.currentTimeMillis () - exitTime) > 2000) {
+                Toast.makeText (getApplicationContext (), "再按一次退出程序",
+                        Toast.LENGTH_SHORT).show ();
+                exitTime = System.currentTimeMillis ();
+            } else {
+                super.onBackPressed ();
+                System.exit (0);
+            }
+        } else {
+            fManager.popBackStack ();
+        }
     }
 
     //隐藏所有Fragment
-    private void hideAllFragment(FragmentTransaction fragmentTransaction){
-        if(mHomeTabFragment != null)fragmentTransaction.hide(mHomeTabFragment);
-        if(mTheoryTabFragment != null)fragmentTransaction.hide(mTheoryTabFragment);
-        if(mSearchTabFragment != null)fragmentTransaction.hide(mSearchTabFragment);
-        if(mSettingTabFragment != null)fragmentTransaction.hide(mSettingTabFragment);
+    private void hideAllFragment(FragmentTransaction fragmentTransaction) {
+        if (mHomeTabFragment != null) fragmentTransaction.hide (mHomeTabFragment);
+        if (mTheoryTabFragment != null) fragmentTransaction.hide (mTheoryTabFragment);
+        if (mSearchTabFragment != null) fragmentTransaction.hide (mSearchTabFragment);
+        if (mVideoTabFragment != null) fragmentTransaction.hide (mVideoTabFragment);
+    }
+    private void selectedFragment(int position) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        hideAllFragment (transaction);
+        switch (position) {
+            case FIRST:
+                mToolbarTitle.setText (getResources ().getText (R.string.app_name));
+                if (mHomeTabFragment == null) {
+                    mHomeTabFragment = new HomeTabFragment ();
+                    transaction.add(R.id.main_content, mHomeTabFragment);
+                } else
+                    transaction.show(mHomeTabFragment);
+                break;
+            case SECOND:
+                mToolbarTitle.setText (getResources ().getText (R.string.tab_menu_theory));
+                if (mTheoryTabFragment == null) {
+                    mTheoryTabFragment = new TheoryTabFragment ();
+                    transaction.add(R.id.main_content, mTheoryTabFragment);
+                } else
+                    transaction.show(mTheoryTabFragment);
+                break;
+            case THIRD:
+                mToolbarTitle.setText (getResources ().getText (R.string.tab_menu_video));
+                if (mVideoTabFragment == null) {
+                    mVideoTabFragment = new VideoTabFragment ();
+                    transaction.add(R.id.main_content, mVideoTabFragment);
+                } else
+                    transaction.show(mVideoTabFragment);
+                break;
+            case FOUR:
+                mToolbarTitle.setText (getResources ().getText (R.string.tab_menu_search));
+                if (mSearchTabFragment == null) {
+                    mSearchTabFragment = new SearchTabFragment ();
+                    transaction.add(R.id.main_content, mSearchTabFragment);
+                } else
+                    transaction.show(mSearchTabFragment);
+                break;
+
+        }
+        transaction.commit();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
     }
 }

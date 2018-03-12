@@ -1,4 +1,5 @@
 package com.hl.AFCHelper.Fragment;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,17 +10,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.hl.AFCHelper.Activity.ListActivity;
 import com.hl.AFCHelper.Adapter.BaseRecyclerAdapter;
 import com.hl.AFCHelper.Adapter.ListDataAdapter;
-import com.hl.AFCHelper.MyApplication;
-import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.Bean.Data;
 import com.hl.AFCHelper.Bean.db.MyDBOpenHelper;
+import com.hl.AFCHelper.MyApplication;
+import com.hl.AFCHelper.R;
 import com.squareup.leakcanary.RefWatcher;
+
 import java.util.ArrayList;
 
-public class TheoryListFragment extends Fragment {
+public class PostListFragment extends Fragment {
 
     private ArrayList<Data> mData;
     private ArrayList<Data> mList;
@@ -32,9 +35,8 @@ public class TheoryListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate (R.layout.recycler_theory_list, container, false);
-        //初始化数据，布局
         initData ();
-        initView();
+        initView ();
 
         return view;
     }
@@ -45,6 +47,7 @@ public class TheoryListFragment extends Fragment {
         RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
         refWatcher.watch(this);
     }
+
     /**
      * 初始化数据
      */
@@ -54,7 +57,7 @@ public class TheoryListFragment extends Fragment {
     /**
      * 初始化布局
      */
-    private void initView(){
+    private void initView() {
         RecyclerView crimeRecyclerView = view.findViewById (R.id.theory_recycler_view);
         crimeRecyclerView.setLayoutManager (new LinearLayoutManager (getActivity ()));
         ListDataAdapter adapter = new ListDataAdapter (R.layout.theory_recycler_list_item, mData);
@@ -72,14 +75,14 @@ public class TheoryListFragment extends Fragment {
             }
         });
         crimeRecyclerView.setAdapter(adapter);
-         }
+    }
 
     private void getData() {
         //db数据库
         MyDBOpenHelper dbHelper = new MyDBOpenHelper (getActivity ());  //注意：dbHelper的实体化
         //查询数据库
         SQLiteDatabase dbRead = dbHelper.getReadableDatabase ();
-        Cursor mCursor = dbRead.rawQuery ("select * from tab_name where id < 100",null);
+        Cursor mCursor = dbRead.rawQuery ("select * from tab_name where id between 200 and 299",null);
         mData = new ArrayList<> ();
         while (mCursor.moveToNext ()) {
             mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
@@ -100,9 +103,9 @@ public class TheoryListFragment extends Fragment {
         Cursor mCursor = dbRead.rawQuery (sql,null);
         mList = new ArrayList<> ();
         while (mCursor.moveToNext ()) {
-             mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
-             titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
-             contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
+            mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
+            titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
+            contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
             Data data = new Data (mid, titleStr, contentStr);
             mList.add (data);
         }

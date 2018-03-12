@@ -4,7 +4,7 @@
     <string name="tab_menu_home">首页</string>
     <string name="tab_menu_theory">知识</string>
     <string name="tab_menu_search">查询</string>
-    <string name="tab_menu_setting">设置</string>
+    <string name="tab_menu_video">视频</string>
 
     <!-- 主页面 -->
     <string name="home_button_text_1">线路信息</string>

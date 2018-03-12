@@ -1,4 +1,4 @@
-        package com.hl.AFCHelper.db;
+        package com.hl.AFCHelper.Bean.db;
 
         import android.content.Context;
         import android.database.sqlite.SQLiteDatabase;
