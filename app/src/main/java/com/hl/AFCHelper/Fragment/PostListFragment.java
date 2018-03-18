@@ -88,7 +88,7 @@ public class PostListFragment extends Fragment {
             mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
             titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
             contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
-            Data data = new Data (mid, titleStr, contentStr);
+            Data data = new Data (mid,titleStr, titleStr, contentStr);
             mData.add (data);
         }
         mCursor.close ();
@@ -106,7 +106,7 @@ public class PostListFragment extends Fragment {
             mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
             titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
             contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
-            Data data = new Data (mid, titleStr, contentStr);
+            Data data = new Data (mid,titleStr, titleStr, contentStr);
             mList.add (data);
         }
         mCursor.close ();

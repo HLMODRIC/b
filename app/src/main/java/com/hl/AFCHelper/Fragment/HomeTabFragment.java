@@ -221,7 +221,7 @@ public class HomeTabFragment extends Fragment {
             int mid = cursor.getInt (cursor.getColumnIndex ("id"));
             String titleStr = cursor.getString (cursor.getColumnIndex ("title"));
             String contentStr = cursor.getString (cursor.getColumnIndex ("content"));
-            Data data = new Data (mid, titleStr, contentStr);
+            Data data = new Data (mid,titleStr, titleStr, contentStr);
             datas.add (data);
         }
         cursor.close ();

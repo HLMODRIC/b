@@ -113,7 +113,7 @@ public class SearchTabFragment extends Fragment {
             String contentStr = cursor.getString (cursor.getColumnIndex ("content"));
             String titleStr = cursor.getString (cursor.getColumnIndex ("title"));
             int mid = cursor.getInt (cursor.getColumnIndex ("id"));
-            Data data = new Data (mid, titleStr, contentStr);
+            Data data = new Data (mid,titleStr, titleStr, contentStr);
             datas.add (data);
         }
         cursor.close ();

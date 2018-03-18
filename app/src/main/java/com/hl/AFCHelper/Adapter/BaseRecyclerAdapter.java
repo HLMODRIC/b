@@ -226,9 +226,9 @@ public abstract class BaseRecyclerAdapter<D, VH extends ViewHolder> extends Recy
          * 设置图片资源
          *
          * @param viewId     view id
-         * @param imageResId 图片资源id
+         * @param imageUrl 图片资源Url
          */
-        public ImageView setImageResource(Context context,int viewId, @DrawableRes int imageResId) {
+        public ImageView setImageResource(Context context,int viewId, String imageUrl) {
             ImageView view = findViewById(viewId);
             view.setAdjustViewBounds (true);
             view.setScaleType (ImageView.ScaleType.FIT_XY);
@@ -238,7 +238,7 @@ public abstract class BaseRecyclerAdapter<D, VH extends ViewHolder> extends Recy
                     .error(R.mipmap.load_error);
 
             Glide.with(context)
-                    .load(imageResId)
+                    .load(imageUrl)
                     .apply (options)
                     .into(view);
             return view;

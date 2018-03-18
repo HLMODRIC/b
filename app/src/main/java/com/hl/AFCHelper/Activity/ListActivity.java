@@ -166,7 +166,7 @@ public class ListActivity extends BaseActivity {
             int mid = cursor.getInt (cursor.getColumnIndex ("id"));
             String titleStr = cursor.getString (cursor.getColumnIndex ("title"));
             String contentStr = cursor.getString (cursor.getColumnIndex ("content"));
-            Data data = new Data (mid, titleStr, contentStr);
+            Data data = new Data (mid, titleStr,titleStr, contentStr);
             Log.d ("33333", mid + titleStr);
             mData.add (data);
         }

@@ -12,11 +12,26 @@ public class Data implements Parcelable {
         private String new_title;
         private String new_content;
 
-        public Data(int mId, String new_title, String new_content) {
-            this.new_title = new_title;
-            this.new_content = new_content;
-            this.mId = mId;
-        }
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    private String imageUrl;
+
+    public Data(int mId,String imageUrl, String new_title, String new_content) {
+        this.new_title = new_title;
+        this.new_content = new_content;
+        this.mId = mId;
+        this.imageUrl = imageUrl;
+    }
+
+    public void setId(int id) {
+        mId = id;
+    }
 
     public String getNew_title() {
             return new_title;
@@ -39,6 +54,7 @@ public class Data implements Parcelable {
             this.new_content = new_content;
         }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -49,15 +65,17 @@ public class Data implements Parcelable {
         dest.writeInt (this.mId);
         dest.writeString (this.new_title);
         dest.writeString (this.new_content);
+        dest.writeString (this.imageUrl);
     }
 
     protected Data(Parcel in) {
         this.mId = in.readInt ();
         this.new_title = in.readString ();
         this.new_content = in.readString ();
+        this.imageUrl = in.readString ();
     }
 
-    public static final Parcelable.Creator<Data> CREATOR = new Parcelable.Creator<Data> () {
+    public static final Creator<Data> CREATOR = new Creator<Data> () {
         @Override
         public Data createFromParcel(Parcel source) {
             return new Data (source);

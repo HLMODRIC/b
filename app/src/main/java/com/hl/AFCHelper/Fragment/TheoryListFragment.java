@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.hl.AFCHelper.Activity.ListActivity;
 import com.hl.AFCHelper.Adapter.BaseRecyclerAdapter;
-import com.hl.AFCHelper.Adapter.ListDataAdapter;
 import com.hl.AFCHelper.Adapter.TheoryListDataAdapter;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
@@ -25,11 +25,11 @@ public class TheoryListFragment extends Fragment {
 
     private ArrayList<Data> mData;
     private ArrayList<Data> mList;
-    private List<Integer> mIntegerList;
     private int mid;
     private String titleStr;
     private String contentStr;
     private View view;
+    private String imageUrl;
 
 
     @Override
@@ -52,10 +52,6 @@ public class TheoryListFragment extends Fragment {
      * 初始化数据
      */
     private void initData(){
-
-        mIntegerList = new ArrayList<> ();
-        mIntegerList.add (R.mipmap.home_iv_1);
-
         getData ();
 
     }
@@ -66,7 +62,7 @@ public class TheoryListFragment extends Fragment {
     private void initView(){
         RecyclerView crimeRecyclerView = view.findViewById (R.id.theory_recycler_view);
         crimeRecyclerView.setLayoutManager (new LinearLayoutManager (getActivity ()));
-        TheoryListDataAdapter adapter = new TheoryListDataAdapter (getContext (),mIntegerList,R.layout.theory_recycler_list_item, mData);
+        TheoryListDataAdapter adapter = new TheoryListDataAdapter (getContext (),R.layout.theory_recycler_list_item, mData);
         adapter.setItemClickListener (new BaseRecyclerAdapter.onItemClickListener () {
             @Override
             public void onItemClick(int position, View v) {
@@ -94,7 +90,9 @@ public class TheoryListFragment extends Fragment {
             mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
             titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
             contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
-            Data data = new Data (mid, titleStr, contentStr);
+            imageUrl = mCursor.getString (mCursor.getColumnIndex ("imageID"));
+            Data data = new Data (mid,imageUrl, titleStr, contentStr);
+            Log.d ("1111",imageUrl);
             mData.add (data);
         }
         mCursor.close ();
@@ -112,7 +110,7 @@ public class TheoryListFragment extends Fragment {
              mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
              titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
              contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
-            Data data = new Data (mid, titleStr, contentStr);
+            Data data = new Data (mid,titleStr, titleStr, contentStr);
             mList.add (data);
         }
         mCursor.close ();
