@@ -31,6 +31,7 @@
         <activity android:theme="@style/AppTheme"
                   android:name="com.hl.AFCHelper.Activity.ImagePagerActivity"
             android:configChanges="orientation|screenSize"/>
+        <activity android:name=".Activity.LoginActivity"/>
 
     </application>
 </manifest>

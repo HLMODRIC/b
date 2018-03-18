@@ -8,15 +8,12 @@
 
     <!-- 主页面 -->
     <string name="home_button_text_1">线路信息</string>
-    <string name="home_button_text_2">部门信息</string>
-    <string name="home_button_text_3">公司制度</string>
-    <string name="home_button_text_4">会议纪要</string>
-    <string name="home_button_text_5">下发文件</string>
-    <string name="home_button_text_6">培训内容</string>
-    <string name="home_button_text_7">岗位职责</string>
-    <string name="home_button_text_8">考核条例</string>
-    <string name="home_button_text_9">应急预案</string>
-    <string name="home_viewpager_text">图片标题</string>
+    <string name="home_button_text_2">公司制度</string>
+    <string name="home_button_text_3">会议纪要</string>
+    <string name="home_button_text_4">下发文件</string>
+    <string name="home_button_text_5">岗位职责</string>
+    <string name="home_button_text_6">工作相关</string>
+    <string name="home_button_text_7">应急预案</string>
 
     <!-- 查询页面 -->
     <string name="search_tab_text_1">TVM相关</string>
@@ -26,9 +23,11 @@
     <string name="search_button_text_1">CHS代码查询</string>
     <string name="search_button_text_2">BNR代码查询</string>
     <string name="search_button_text_3">MBC110代码查询</string>
-    <string name="search_button_text_4">刷卡代码查询</string>
-    <string name="search_button_text_5">车站IP查询</string>
-    <string name="search_button_text_6">螺丝查询</string>
+    <string name="search_button_text_4">MBC120代码查询</string>
+    <string name="search_button_text_5">刷卡代码查询</string>
+    <string name="search_button_text_6">车站IP查询</string>
+    <string name="search_button_text_7">螺丝查询</string>
+    <string name="search_button_text_8">线标查询</string>
 
     <!-- 知识页面 -->
     <string name="theory_tab_text_1">理论知识</string>
@@ -43,18 +42,22 @@
     <string name="theory_button_text_8">其他</string>
 
 
-    <!-- 设置页面 -->
-    <string name="repair_button_text_1">TVM故障</string>
-    <string name="repair_button_text_2">GATE故障</string>
-    <string name="repair_button_text_3">POST故障</string>
-    <string name="repair_button_text_4">其他故障</string>
-    <string name="repair_button_text_5">保养相关</string>
-    <string name="repair_button_text_6">维修待定</string>
-    <string name="user_name">用户名</string>
-    <string name="user_id">账号:100001</string>
-    <string name="user_password">密码:100001</string>
+    <!-- NavigationView页面 -->
+    <string name="nav_item_1">收藏文章</string>
+    <string name="nav_item_2">收藏视频</string>
+    <string name="nav_item_3">正文字体</string>
+    <string name="nav_item_4">检查更新</string>
+    <string name="nav_item_5">关于</string>
+    <string name="nav_item_6">注销登录</string>
 
-    <!-- 设置页面 -->
+    <!-- Login页面 -->
+    <string name="login_tv_title">登录</string>
+    <string name="login_ev_username">账号</string>
+    <string name="login_ev_password">密码</string>
+    <string name="loin_btn_login">登录</string>
+
+
+    <!-- list页面 -->
     <string name="content_tab_text">内容</string>
     <string name="recycler_list_tab_text">标题</string>
 

@@ -15,9 +15,11 @@ import java.util.List;
 public class TheoryTabFragment extends Fragment {
     private View view;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fg_theory,container,false);
+
         initData ();
         initView ();
          return view;
@@ -42,5 +44,10 @@ public class TheoryTabFragment extends Fragment {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setupWithViewPager (viewPager);
 
+
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

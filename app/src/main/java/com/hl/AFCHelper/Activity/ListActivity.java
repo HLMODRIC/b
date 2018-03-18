@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -22,6 +21,7 @@ import com.hl.AFCHelper.Bean.db.MyDBOpenHelper;
 import com.hl.AFCHelper.Fragment.ListFragment;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
+import com.hl.AFCHelper.UI.MyToolBar;
 import com.hl.AFCHelper.Until.SearchDataHelper;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -33,7 +33,7 @@ public class ListActivity extends BaseActivity {
     @BindView(R.id.toolbar_list_title)
     TextView mToolbarListTitle;
     @BindView(R.id.toolbar_list)
-    Toolbar mToolbarList;
+    MyToolBar mToolbarList;
     @BindView(R.id.fl_content)
     FrameLayout mFlContent;
     private ArrayList<Data> mData;

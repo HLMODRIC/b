@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,9 +12,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
-import com.hl.AFCHelper.Bean.DataTest;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
+import com.hl.AFCHelper.UI.MyToolBar;
 import com.squareup.leakcanary.RefWatcher;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +107,7 @@ public class ContentActivity extends BaseActivity implements View.OnTouchListene
      */
     @Override
     protected void initView() {
-        Toolbar toolbar = findViewById (R.id.toolbar_content);
+        MyToolBar toolbar = findViewById (R.id.toolbar_content);
         TextView textView = findViewById (R.id.toolbar_content_title);
         mMarkdownView = findViewById(R.id.markdown_view);
         toolbar.setTitle ("");
@@ -134,7 +133,6 @@ public class ContentActivity extends BaseActivity implements View.OnTouchListene
         css.addRule ("h5","font-weight: 700");
         css.addRule ("h6","font-weight: 700");
         mMarkdownView.addStyleSheet(css);
-        DataTest dataTest = new DataTest ();
 
         mMarkdownView.loadMarkdown(content);
 

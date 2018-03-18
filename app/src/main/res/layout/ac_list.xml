@@ -4,7 +4,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:background="@color/bg_white">
 
-    <android.support.v7.widget.Toolbar
+    <com.hl.AFCHelper.UI.MyToolBar
         android:id="@+id/toolbar_list"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -20,7 +20,7 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:layout_gravity="center"/>
-    </android.support.v7.widget.Toolbar>
+    </com.hl.AFCHelper.UI.MyToolBar>
 
     <FrameLayout
         android:id="@+id/fl_content"

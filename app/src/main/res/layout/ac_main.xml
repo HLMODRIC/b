@@ -9,13 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
+    <com.hl.AFCHelper.UI.MyToolBar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentTop="true"
+        android:layout_height="46dp"
         android:background="@color/md_blue_500"
-        app:navigationIcon="@mipmap/item_back"
+        app:navigationIcon="@mipmap/item_more"
         app:title=""
         >
         <TextView
@@ -26,7 +25,7 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:layout_gravity="center"/>
-    </android.support.v7.widget.Toolbar>
+    </com.hl.AFCHelper.UI.MyToolBar>
 
         <FrameLayout
             android:id="@+id/main_content"

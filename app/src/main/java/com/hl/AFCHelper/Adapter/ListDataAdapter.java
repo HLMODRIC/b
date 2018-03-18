@@ -1,5 +1,7 @@
 package com.hl.AFCHelper.Adapter;
 
+import android.content.Context;
+
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.Bean.Data;
 import java.util.ArrayList;

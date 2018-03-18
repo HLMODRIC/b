@@ -66,18 +66,6 @@ public class HomeTabFragment extends Fragment {
     TextView mTvName6;
     @BindView(R.id.ll_item6)
     LinearLayout mLlItem6;
-    @BindView(R.id.home_item_tv_7)
-    TextView mHomeItemTv7;
-    @BindView(R.id.ll_item7)
-    LinearLayout mLlItem7;
-    @BindView(R.id.home_item_tv_8)
-    TextView mHomeItemTv8;
-    @BindView(R.id.ll_item8)
-    LinearLayout mLlItem8;
-    @BindView(R.id.home_item_tv_9)
-    TextView mHomeItemTv9;
-    @BindView(R.id.ll_item9)
-    LinearLayout mLlItem9;
     Unbinder unbinder;
     private List<String> ListPhotos;
     private ScheduledExecutorService scheduledExecutorService;
@@ -198,27 +186,7 @@ public class HomeTabFragment extends Fragment {
                 getData (searchDataHelper.ShowData (tableName));
             }
         });
-        mLlItem7.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                tableName = getResources ().getString (R.string.home_button_text_7);
-                getData (searchDataHelper.ShowData (tableName));
-            }
-        });
-        mLlItem8.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                tableName = getResources ().getString (R.string.home_button_text_8);
-                getData (searchDataHelper.ShowData (tableName));
-            }
-        });
-        mLlItem9.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                tableName = getResources ().getString (R.string.home_button_text_9);
-                getData (searchDataHelper.ShowData (tableName));
-            }
-        });
+
     }
 
 

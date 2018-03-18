@@ -24,8 +24,6 @@
          */
         public class DBManager {
 
-            private static SQLiteDatabase database;
-
             public static final String DATABASE_FILENAME = "app.db";
 
             public static final String PACKAGE_NAME = "com.hl.AFCHelper";
@@ -51,7 +49,7 @@
                         fos.close();
                         is.close();
                     }
-                    database = SQLiteDatabase.openOrCreateDatabase(databaseFilename, null);
+                    SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase (databaseFilename, null);
                     return database;
                 } catch (Exception e) {
                 }

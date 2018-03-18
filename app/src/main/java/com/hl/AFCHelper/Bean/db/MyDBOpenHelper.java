@@ -17,8 +17,8 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //String sql = "CREATE TABLE IF NOT EXISTS repair(id integer primary key autoincrement,title varchar,content varchar);";     //建数据表
-       // db.execSQL(sql);    //执行SQL语句
+        //String sql="create table user(id integer primary key autoincrement,username varchar(20),password varchar(20),age integer,sex varchar(2))";
+        //db.execSQL(sql);    //执行SQL语句
     }
 
 

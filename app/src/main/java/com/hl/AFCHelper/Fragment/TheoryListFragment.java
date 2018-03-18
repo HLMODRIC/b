@@ -12,17 +12,20 @@ import android.view.ViewGroup;
 import com.hl.AFCHelper.Activity.ListActivity;
 import com.hl.AFCHelper.Adapter.BaseRecyclerAdapter;
 import com.hl.AFCHelper.Adapter.ListDataAdapter;
+import com.hl.AFCHelper.Adapter.TheoryListDataAdapter;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.Bean.Data;
 import com.hl.AFCHelper.Bean.db.MyDBOpenHelper;
 import com.squareup.leakcanary.RefWatcher;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TheoryListFragment extends Fragment {
 
     private ArrayList<Data> mData;
     private ArrayList<Data> mList;
+    private List<Integer> mIntegerList;
     private int mid;
     private String titleStr;
     private String contentStr;
@@ -49,15 +52,21 @@ public class TheoryListFragment extends Fragment {
      * 初始化数据
      */
     private void initData(){
+
+        mIntegerList = new ArrayList<> ();
+        mIntegerList.add (R.mipmap.home_iv_1);
+
         getData ();
+
     }
+
     /**
      * 初始化布局
      */
     private void initView(){
         RecyclerView crimeRecyclerView = view.findViewById (R.id.theory_recycler_view);
         crimeRecyclerView.setLayoutManager (new LinearLayoutManager (getActivity ()));
-        ListDataAdapter adapter = new ListDataAdapter (R.layout.theory_recycler_list_item, mData);
+        TheoryListDataAdapter adapter = new TheoryListDataAdapter (getContext (),mIntegerList,R.layout.theory_recycler_list_item, mData);
         adapter.setItemClickListener (new BaseRecyclerAdapter.onItemClickListener () {
             @Override
             public void onItemClick(int position, View v) {

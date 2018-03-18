@@ -6,17 +6,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.Toolbar;
+import com.hl.AFCHelper.UI.MyToolBar;
+
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.hl.AFCHelper.Bean.db.DBManager;
 import com.hl.AFCHelper.Fragment.HomeTabFragment;
 import com.hl.AFCHelper.Fragment.SearchTabFragment;
 import com.hl.AFCHelper.Fragment.TheoryTabFragment;
-import com.hl.AFCHelper.Fragment.TvmListFragment;
 import com.hl.AFCHelper.Fragment.VideoTabFragment;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
@@ -28,7 +29,7 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    MyToolBar mToolbar;
     @BindView(R.id.main_content)
     FrameLayout mMainContent;
     @BindView(R.id.nav_view)
@@ -54,12 +55,6 @@ public class MainActivity extends BaseActivity {
     public static final int THIRD = 2;
     public static final int FOUR = 3;
 
-    @Override
-    protected void initData() {
-        super.initData ();
-        //数据库操作
-        DBManager.openDatabase (getApplicationContext ());
-    }
 
     @Override
     protected boolean isImmersionBarEnabled() {
@@ -74,8 +69,6 @@ public class MainActivity extends BaseActivity {
         //Toolbar
         mToolbar.setTitle ("");
         setSupportActionBar (mToolbar);
-        //DrawerLayout
-        mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         //NavigationView
         mNavView.setNavigationItemSelectedListener (new NavigationView.OnNavigationItemSelectedListener () {
             @Override
@@ -138,6 +131,8 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected (item);
     }
 
+
+
     //点击回退键的处理：判断Fragment栈中是否有Fragment
 //没，双击退出程序，否则像是Toast提示
 //有，popBackStack弹出栈
@@ -172,32 +167,50 @@ public class MainActivity extends BaseActivity {
                 mToolbarTitle.setText (getResources ().getText (R.string.app_name));
                 if (mHomeTabFragment == null) {
                     mHomeTabFragment = new HomeTabFragment ();
+                    //DrawerLayout
+                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_UNLOCKED);
                     transaction.add(R.id.main_content, mHomeTabFragment);
                 } else
-                    transaction.show(mHomeTabFragment);
+                    //DrawerLayout
+                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_UNLOCKED);
+
+                transaction.show(mHomeTabFragment);
                 break;
             case SECOND:
                 mToolbarTitle.setText (getResources ().getText (R.string.tab_menu_theory));
                 if (mTheoryTabFragment == null) {
+                    //DrawerLayout
+                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     mTheoryTabFragment = new TheoryTabFragment ();
                     transaction.add(R.id.main_content, mTheoryTabFragment);
                 } else
+                    //DrawerLayout
+                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
                     transaction.show(mTheoryTabFragment);
                 break;
             case THIRD:
+                //DrawerLayout
+                mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 mToolbarTitle.setText (getResources ().getText (R.string.tab_menu_video));
                 if (mVideoTabFragment == null) {
                     mVideoTabFragment = new VideoTabFragment ();
                     transaction.add(R.id.main_content, mVideoTabFragment);
                 } else
+                    //DrawerLayout
+                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     transaction.show(mVideoTabFragment);
                 break;
             case FOUR:
                 mToolbarTitle.setText (getResources ().getText (R.string.tab_menu_search));
                 if (mSearchTabFragment == null) {
+                    //DrawerLayout
+                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     mSearchTabFragment = new SearchTabFragment ();
                     transaction.add(R.id.main_content, mSearchTabFragment);
                 } else
+                    //DrawerLayout
+                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                     transaction.show(mSearchTabFragment);
                 break;
 
@@ -208,4 +221,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
     }
+
+
 }

@@ -123,7 +123,7 @@ public abstract class BaseRecyclerAdapter<D, VH extends ViewHolder> extends Recy
             case HEAD_TYPE:
                 break;
             case FOOT_TYPE:
-                break;
+              break;
         }
     }
 
@@ -240,7 +240,6 @@ public abstract class BaseRecyclerAdapter<D, VH extends ViewHolder> extends Recy
             Glide.with(context)
                     .load(imageResId)
                     .apply (options)
-                    .thumbnail(0.1f)//先显示缩略图  缩略图为原图的1/10
                     .into(view);
             return view;
         }

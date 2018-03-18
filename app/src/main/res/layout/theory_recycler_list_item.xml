@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout
-    android:layout_height="55dp"
+    android:layout_height="100dp"
     android:layout_width="match_parent"
     android:background="@drawable/list_view_item_click"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/iv1"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"/>
 
     <TextView
         android:id="@+id/txt_item_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/iv1"
         android:gravity="center"
-        android:drawableLeft="@mipmap/item_list_text"
-        android:drawableStart="@mipmap/item_list_text"
         android:text="@string/tab_menu_home"
         android:textSize="@dimen/textSize_15"
         android:textColor="@color/bg_black"
         android:drawableRight="@mipmap/item_list_right"
         android:drawableEnd="@mipmap/item_list_right"
-        />
+        android:layout_toEndOf="@+id/iv1"/>
 </RelativeLayout>
 
 
