@@ -1,5 +1,6 @@
 package com.hl.AFCHelper.Adapter;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,12 +13,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.hl.AFCHelper.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.ColorFilterTransformation;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import jp.wasabeef.glide.transformations.CropSquareTransformation;
+import jp.wasabeef.glide.transformations.CropTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import jp.wasabeef.glide.transformations.internal.Utils;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 /*
  * 文件名:    BaseRecyclerAdapter
@@ -234,7 +246,8 @@ public abstract class BaseRecyclerAdapter<D, VH extends ViewHolder> extends Recy
             view.setScaleType (ImageView.ScaleType.FIT_XY);
 
             RequestOptions options = new RequestOptions ()
-                    .diskCacheStrategy (DiskCacheStrategy.ALL)
+                    .apply(bitmapTransform(new RoundedCornersTransformation(30, 0, RoundedCornersTransformation.CornerType.ALL)))
+                    .diskCacheStrategy (DiskCacheStrategy.NONE)
                     .error(R.mipmap.load_error);
 
             Glide.with(context)

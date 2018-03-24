@@ -23,7 +23,7 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.hl.AFCHelper.Adapter.HackyViewPager;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
-import com.squareup.leakcanary.RefWatcher;
+//import com.squareup.leakcanary.RefWatcher;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -101,8 +101,8 @@ public class ImagePagerActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = MyApplication.getRefWatcher(this);//1
-        refWatcher.watch(this);
+        //RefWatcher refWatcher = MyApplication.getRefWatcher(this);//1
+        //refWatcher.watch(this);
     }
 
     private void getIntentData() {

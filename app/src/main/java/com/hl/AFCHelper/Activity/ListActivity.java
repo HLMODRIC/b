@@ -23,7 +23,7 @@ import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.UI.MyToolBar;
 import com.hl.AFCHelper.Until.SearchDataHelper;
-import com.squareup.leakcanary.RefWatcher;
+//import com.squareup.leakcanary.RefWatcher;
 
 import java.util.ArrayList;
 
@@ -81,8 +81,8 @@ public class ListActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy ();
-        RefWatcher refWatcher = MyApplication.getRefWatcher (this);//1
-        refWatcher.watch (this);
+        //RefWatcher refWatcher = MyApplication.getRefWatcher (this);//1
+        //refWatcher.watch (this);
     }
 
     @Override
@@ -166,8 +166,7 @@ public class ListActivity extends BaseActivity {
             int mid = cursor.getInt (cursor.getColumnIndex ("id"));
             String titleStr = cursor.getString (cursor.getColumnIndex ("title"));
             String contentStr = cursor.getString (cursor.getColumnIndex ("content"));
-            Data data = new Data (mid, titleStr,titleStr, contentStr);
-            Log.d ("33333", mid + titleStr);
+            Data data = new Data (mid,titleStr, contentStr);
             mData.add (data);
         }
         cursor.close ();

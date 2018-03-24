@@ -22,7 +22,8 @@ public class GlideImageLoader extends ImageLoader {
                 .diskCacheStrategy (DiskCacheStrategy.ALL)
                 .error(R.mipmap.load_error);
 
-        Glide.with(context).load(path)
+        Glide.with(context)
+                .load(path)
                 .apply (options)
                 .into(imageView);
     }

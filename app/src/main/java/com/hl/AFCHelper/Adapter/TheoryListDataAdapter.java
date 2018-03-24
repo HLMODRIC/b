@@ -18,6 +18,6 @@ public class TheoryListDataAdapter extends BaseRecyclerAdapter<Data, BaseRecycle
     @Override
     protected void bindTheData(BaseRecyclerAdapter.BaseViewHolder holder, Data data, int position) {
     holder.setText (R.id.txt_item_title,data.getNew_title ());
-    holder.setImageResource (mContext,R.id.iv1, data.getImageUrl ());
+    holder.setImageResource (mContext,R.id.iv_title, data.getImageUrl ());
     }
 }

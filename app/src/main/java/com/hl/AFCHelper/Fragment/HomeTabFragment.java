@@ -21,7 +21,7 @@ import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.Until.GlideImageLoader;
 import com.hl.AFCHelper.Until.SearchDataHelper;
-import com.squareup.leakcanary.RefWatcher;
+//import com.squareup.leakcanary.RefWatcher;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -36,7 +36,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 2018/1/23
+ * 2018/a/23
  * 主页
  */
 public class HomeTabFragment extends Fragment {
@@ -193,8 +193,8 @@ public class HomeTabFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy ();
-        RefWatcher refWatcher = MyApplication.getRefWatcher (getActivity ());
-        refWatcher.watch (this);
+        //RefWatcher refWatcher = MyApplication.getRefWatcher (getActivity ());
+        //refWatcher.watch (this);
     }
 
 
@@ -221,7 +221,7 @@ public class HomeTabFragment extends Fragment {
             int mid = cursor.getInt (cursor.getColumnIndex ("id"));
             String titleStr = cursor.getString (cursor.getColumnIndex ("title"));
             String contentStr = cursor.getString (cursor.getColumnIndex ("content"));
-            Data data = new Data (mid,titleStr, titleStr, contentStr);
+            Data data = new Data (mid, titleStr, contentStr);
             datas.add (data);
         }
         cursor.close ();

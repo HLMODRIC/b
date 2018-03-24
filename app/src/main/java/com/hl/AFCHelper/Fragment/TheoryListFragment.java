@@ -17,7 +17,7 @@ import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.Bean.Data;
 import com.hl.AFCHelper.Bean.db.MyDBOpenHelper;
-import com.squareup.leakcanary.RefWatcher;
+//import com.squareup.leakcanary.RefWatcher;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,8 +45,8 @@ public class TheoryListFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
-        refWatcher.watch(this);
+       // RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
+        //refWatcher.watch(this);
     }
     /**
      * 初始化数据
@@ -91,7 +91,7 @@ public class TheoryListFragment extends Fragment {
             titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
             contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
             imageUrl = mCursor.getString (mCursor.getColumnIndex ("imageID"));
-            Data data = new Data (mid,imageUrl, titleStr, contentStr);
+            Data data = new Data (mid, titleStr, contentStr, imageUrl);
             Log.d ("1111",imageUrl);
             mData.add (data);
         }
@@ -110,7 +110,7 @@ public class TheoryListFragment extends Fragment {
              mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
              titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
              contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
-            Data data = new Data (mid,titleStr, titleStr, contentStr);
+            Data data = new Data (mid, titleStr, contentStr);
             mList.add (data);
         }
         mCursor.close ();

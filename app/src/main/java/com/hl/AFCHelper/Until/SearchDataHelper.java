@@ -91,6 +91,9 @@ public class SearchDataHelper {
             case "radio_item_6":
                 return "select * from radio where id between 500 and 599";
 
+            /*
+            *查询
+             */
             case  "CHS代码查询":
                 return "select * from chs_code";
             case  "BNR代码查询":
@@ -134,11 +137,11 @@ public class SearchDataHelper {
              */
                 case "AFC系统介绍":
                     return "select * from theory where id < 100 and content like ?";
-                case "TVM各模块介绍":
+                case "TVM系统介绍":
                     return "select * from theory where id between 100 and 199 and content like ?";
-                case "GATE各模块介绍":
+                case "GATE系统介绍":
                     return "select * from theory where id between 200 and 299 and content like ?";
-                case "POST各模块介绍":
+                case "POST系统介绍":
                     return "select * from theory where id between 300 and 399 and content like ?";
                 case "软件操作相关":
                     return "select * from theory where id between 400 and 499 and content like ?";
@@ -194,6 +197,21 @@ public class SearchDataHelper {
                 case "radio_item_6":
                     return "select * from radio where id between 500 and 599 and content like ?";
 
+            /*
+            *查询
+             */
+                case  "CHS代码查询":
+                    return "select * from chs_code where content like ?";
+                case  "BNR代码查询":
+                    return "select * from bnr_code where content like ?";
+                case  "MBC110代码查询":
+                    return "select * from mbc_code where content like ?";
+                case  "刷卡代码查询":
+                    return "select * from card_code where content like ?";
+                case  "车站IP查询":
+                    return "select * from ip_code where content like ?";
+                case  "螺丝查询":
+                    return "select * from screw_code where content like ?";
                 default:
                     return "select * from radio where id between 500 and 599 and content like ?";
             }

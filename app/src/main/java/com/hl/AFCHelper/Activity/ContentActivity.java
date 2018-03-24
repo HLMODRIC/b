@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.UI.MyToolBar;
-import com.squareup.leakcanary.RefWatcher;
+//import com.squareup.leakcanary.RefWatcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -50,8 +50,8 @@ public class ContentActivity extends BaseActivity implements View.OnTouchListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = MyApplication.getRefWatcher(this);//
-        refWatcher.watch(this);
+        //RefWatcher refWatcher = MyApplication.getRefWatcher(this);//
+        //refWatcher.watch(this);
     }
 
     @Override
@@ -124,6 +124,8 @@ public class ContentActivity extends BaseActivity implements View.OnTouchListene
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface", "ClickableViewAccessibility"})
     protected void initWebView() {
         InternalStyleSheet css = new Github();
+        css.addRule("table th", "padding: 2px 4px");
+        css.addRule("table td", "padding: 2px 4px");
         css.addRule("body",  "padding: 0px");
         css.addRule(".scrollup", "width: 40px", "height: 40px","background-color: #2196F3","bottom: 25px", "right: 25px");
         css.addRule ("h1","font-weight: 700");

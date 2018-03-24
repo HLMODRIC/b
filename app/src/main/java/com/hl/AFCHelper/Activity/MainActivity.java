@@ -1,11 +1,13 @@
 package com.hl.AFCHelper.Activity;
 
+import android.Manifest;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+
 import com.hl.AFCHelper.UI.MyToolBar;
 
 import android.view.Menu;
@@ -23,11 +25,15 @@ import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.UI.BottomBar;
 import com.hl.AFCHelper.UI.BottomBarTab;
-import com.squareup.leakcanary.RefWatcher;
+import com.hl.AFCHelper.Until.FileUtils;
+//import com.squareup.leakcanary.RefWatcher;
+
+import java.util.List;
 
 import butterknife.BindView;
+import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
     @BindView(R.id.toolbar)
     MyToolBar mToolbar;
     @BindView(R.id.main_content)
@@ -43,6 +49,8 @@ public class MainActivity extends BaseActivity {
 
     //设置退出时间
     private long exitTime = 0;
+
+    private final int WRITE_AND_MOUNT = 1;
     //Fragment
     private HomeTabFragment mHomeTabFragment;
     private VideoTabFragment mVideoTabFragment;
@@ -54,6 +62,8 @@ public class MainActivity extends BaseActivity {
     public static final int SECOND = 1;
     public static final int THIRD = 2;
     public static final int FOUR = 3;
+    private String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS};
+
 
 
     @Override
@@ -107,12 +117,46 @@ public class MainActivity extends BaseActivity {
         mImmersionBar.titleBar (R.id.toolbar).init ();
     }
 
+    @Override
+    protected void initData() {
+        super.initData ();
+         if (EasyPermissions.hasPermissions(getApplicationContext (), perms)) {
+            FileUtils.getInstance (getApplicationContext ()).createSDCardDir ();
+            FileUtils.getInstance(getApplicationContext ()).copyAssetsToSD("video","AFCHelper");
+        } else {
+            EasyPermissions.requestPermissions(this, "视频播放需要读写外部存储，请授权",
+                    WRITE_AND_MOUNT, perms);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    //成功
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> list) {
+        FileUtils.getInstance (getApplicationContext ()).createSDCardDir ();
+        FileUtils.getInstance(getApplicationContext ()).copyAssetsToSD("video","AFCHelper");
+
+    }
+
+    //失败
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> list) {
+        }
+
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy ();
-        RefWatcher refWatcher = MyApplication.getRefWatcher (getApplicationContext ());
-        refWatcher.watch (this);
+        //RefWatcher refWatcher = MyApplication.getRefWatcher (getApplicationContext ());
+        //refWatcher.watch (this);
     }
 
     @Override

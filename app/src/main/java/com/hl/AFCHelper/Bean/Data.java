@@ -4,29 +4,36 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by huanglei on 2018/1/17.
+ * Created by huanglei on 2018/a/17.
  */
 
 public class Data implements Parcelable {
         private int mId;
         private String new_title;
         private String new_content;
+        private String imageUrl;
+    private String videoUrl;
 
-    public String getImageUrl() {
-        return imageUrl;
+
+    public Data(int mId, String new_title, String new_content) {
+        this.new_title = new_title;
+        this.new_content = new_content;
+        this.mId = mId;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    private String imageUrl;
-
-    public Data(int mId,String imageUrl, String new_title, String new_content) {
+    public Data(int mId, String new_title, String new_content,String imageUrl) {
         this.new_title = new_title;
         this.new_content = new_content;
         this.mId = mId;
         this.imageUrl = imageUrl;
+    }
+
+    public Data(int mId, String new_title, String new_content,String imageUrl,String videoUrl) {
+        this.new_title = new_title;
+        this.new_content = new_content;
+        this.mId = mId;
+        this.imageUrl = imageUrl;
+        this.videoUrl =videoUrl;
     }
 
     public void setId(int id) {
@@ -54,6 +61,20 @@ public class Data implements Parcelable {
             this.new_content = new_content;
         }
 
+        public String getImageUrl() {
+        return imageUrl;
+    }
+
+        public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
 
     @Override
     public int describeContents() {
@@ -66,6 +87,7 @@ public class Data implements Parcelable {
         dest.writeString (this.new_title);
         dest.writeString (this.new_content);
         dest.writeString (this.imageUrl);
+        dest.writeString (this.videoUrl);
     }
 
     protected Data(Parcel in) {
@@ -73,6 +95,7 @@ public class Data implements Parcelable {
         this.new_title = in.readString ();
         this.new_content = in.readString ();
         this.imageUrl = in.readString ();
+        this.videoUrl = in.readString ();
     }
 
     public static final Creator<Data> CREATOR = new Creator<Data> () {

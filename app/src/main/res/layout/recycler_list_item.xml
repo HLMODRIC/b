@@ -16,6 +16,7 @@
         android:textColor="@color/bg_black"
         android:drawableRight="@mipmap/item_list_right"
         android:drawableEnd="@mipmap/item_list_right"
+        android:lines="1"
         />
 </RelativeLayout>
 

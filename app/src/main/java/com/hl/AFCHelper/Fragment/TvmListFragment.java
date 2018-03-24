@@ -11,24 +11,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hl.AFCHelper.Activity.ListActivity;
+import com.hl.AFCHelper.Activity.VideoListActivity;
 import com.hl.AFCHelper.Adapter.BaseRecyclerAdapter;
-import com.hl.AFCHelper.Adapter.ListDataAdapter;
+import com.hl.AFCHelper.Adapter.TheoryListDataAdapter;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.Bean.Data;
 import com.hl.AFCHelper.Bean.db.MyDBOpenHelper;
-import com.squareup.leakcanary.RefWatcher;
+//import com.squareup.leakcanary.RefWatcher;
 
 import java.util.ArrayList;
 
 public class TvmListFragment extends Fragment {
 
     private ArrayList<Data> mData;
-    private ArrayList<Data> mList;
+    private ArrayList<Data> list;
     private int mid;
     private String titleStr;
     private String contentStr;
+    private String imageUrl;
+    private String videoUrl;
     private View view;
 
 
@@ -44,8 +46,8 @@ public class TvmListFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
-        refWatcher.watch(this);
+       // RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
+        //refWatcher.watch(this);
     }
 
     /**
@@ -60,14 +62,14 @@ public class TvmListFragment extends Fragment {
     private void initView() {
         RecyclerView crimeRecyclerView = view.findViewById (R.id.theory_recycler_view);
         crimeRecyclerView.setLayoutManager (new LinearLayoutManager (getActivity ()));
-        ListDataAdapter adapter = new ListDataAdapter (R.layout.theory_recycler_list_item, mData);
+        TheoryListDataAdapter adapter = new TheoryListDataAdapter (getContext (),R.layout.theory_recycler_list_item, mData);
         adapter.setItemClickListener (new BaseRecyclerAdapter.onItemClickListener () {
             @Override
             public void onItemClick(int position, View v) {
-                Intent intent=new Intent (getActivity (),ListActivity.class);
+                Intent intent=new Intent (getActivity (),VideoListActivity.class);
                 Bundle bundle=new Bundle();
                 getTabData (mData.get (position).getNew_content ());
-                bundle.putSerializable ("data",mList);
+                bundle.putParcelableArrayList ("videoData",list);
                 bundle.putString ("table_name",mData.get (position).getNew_title ());
                 intent.putExtras(bundle);
                 bundle.clear ();
@@ -88,7 +90,7 @@ public class TvmListFragment extends Fragment {
             mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
             titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
             contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
-            Data data = new Data (mid,titleStr, titleStr, contentStr);
+            Data data = new Data (mid, titleStr, contentStr);
             mData.add (data);
         }
         mCursor.close ();
@@ -101,13 +103,15 @@ public class TvmListFragment extends Fragment {
         //查询数据库
         SQLiteDatabase dbRead = dbHelper.getReadableDatabase ();
         Cursor mCursor = dbRead.rawQuery (sql,null);
-        mList = new ArrayList<> ();
+        list = new ArrayList<> ();
         while (mCursor.moveToNext ()) {
             mid = mCursor.getInt (mCursor.getColumnIndex ("id"));
             titleStr = mCursor.getString (mCursor.getColumnIndex ("title"));
             contentStr = mCursor.getString (mCursor.getColumnIndex ("content"));
-            Data data = new Data (mid,titleStr, titleStr, contentStr);
-            mList.add (data);
+            imageUrl = mCursor.getString (mCursor.getColumnIndex ("imageUrl"));
+            videoUrl = mCursor.getString (mCursor.getColumnIndex ("videoUrl"));
+            Data data = new Data (mid,titleStr, contentStr,imageUrl,videoUrl);
+            list.add (data);
         }
         mCursor.close ();
         dbHelper.close ();

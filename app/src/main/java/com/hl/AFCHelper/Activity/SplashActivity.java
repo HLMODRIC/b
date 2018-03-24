@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.hl.AFCHelper.Bean.db.DBManager;
+import com.hl.AFCHelper.Until.FileUtils;
+import com.vondear.rxtools.RxDeviceTool;
+import com.vondear.rxtools.RxPermissionsTool;
+
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
  * Created by huanglei on 2018/3/9.
@@ -14,10 +19,14 @@ import com.hl.AFCHelper.Bean.db.DBManager;
 
 public class SplashActivity extends Activity {
     private final int SPLASH_DISPLAY_LENGHT = 1000; // 延迟两秒
+    private FileUtils mFileUtils;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+
 
         new Handler ().postDelayed(new Runnable()
         {
@@ -31,5 +40,7 @@ public class SplashActivity extends Activity {
                finish();//关闭主窗口
             }
         }, SPLASH_DISPLAY_LENGHT);
+
+
     }
 }
