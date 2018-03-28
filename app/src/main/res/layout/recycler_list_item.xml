@@ -9,13 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:drawableLeft="@mipmap/item_list_text"
-        android:drawableStart="@mipmap/item_list_text"
+        android:drawableLeft="@drawable/item_list_text"
+        android:drawableStart="@drawable/item_list_text"
         android:text="@string/tab_menu_home"
         android:textSize="@dimen/textSize_15"
         android:textColor="@color/bg_black"
-        android:drawableRight="@mipmap/item_list_right"
-        android:drawableEnd="@mipmap/item_list_right"
+        android:drawableRight="@drawable/item_list_right"
+        android:drawableEnd="@drawable/item_list_right"
         android:lines="1"
         />
 </RelativeLayout>

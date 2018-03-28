@@ -15,11 +15,12 @@ import com.hl.AFCHelper.Adapter.ListDataAdapter;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.Bean.Data;
+import com.squareup.leakcanary.RefWatcher;
 //import com.squareup.leakcanary.RefWatcher;
 import java.util.ArrayList;
 
 public class ListFragment extends Fragment {
-    private ArrayList<Data> datas = null;
+    private ArrayList<Data> datas;
     private View view;
 
 
@@ -35,8 +36,11 @@ public class ListFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-      //  RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
-        //refWatcher.watch(this);
+        datas.clear ();
+        datas = null;
+        System.gc ();
+        RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 
     /**

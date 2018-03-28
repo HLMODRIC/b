@@ -4,7 +4,7 @@
 
     <item android:title="@string/app_name"
           android:id="@+id/item_search"
-          android:icon="@mipmap/tab_search"
+          android:icon="@drawable/tab_search"
           app:showAsAction="always"
           android:visible="false"
         />

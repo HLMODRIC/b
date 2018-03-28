@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.hl.AFCHelper.Adapter.TheoryFragmentPagerAdapter;
+import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
+import com.squareup.leakcanary.RefWatcher;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,5 +52,8 @@ public class TheoryTabFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        System.gc ();
+         RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 }

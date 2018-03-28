@@ -70,7 +70,7 @@ public class VideoContentActivity extends BaseActivity {
         //Glide 加载图片简单用法
         RequestOptions options = new RequestOptions ()
                 .diskCacheStrategy (DiskCacheStrategy.ALL)
-                .error(R.mipmap.load_error);
+                .error(R.drawable.load_error);
 
         Glide.with(getApplicationContext ())
                 .applyDefaultRequestOptions (options)

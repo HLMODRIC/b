@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
-        android:theme="@style/AutoButton"
+        android:background="@drawable/btn_bottom_confirm_bg"
         android:gravity="center"
         android:text="@string/search_button_text_1"/>
 
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
-        android:theme="@style/AutoButton"
+        android:background="@drawable/btn_bottom_confirm_bg"
         android:gravity="center"
         android:text="@string/search_button_text_2"/>
 
@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
-        android:theme="@style/AutoButton"
+        android:background="@drawable/btn_bottom_confirm_bg"
         android:gravity="center"
         android:text="@string/search_button_text_3"/>
 
@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
-        android:theme="@style/AutoButton"
+        android:background="@drawable/btn_bottom_confirm_bg"
         android:gravity="center"
         android:text="@string/search_button_text_4"/>
 
@@ -117,7 +117,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
-        android:theme="@style/AutoButton"
+        android:background="@drawable/btn_bottom_confirm_bg"
         android:gravity="center"
         android:textSize="@dimen/textSize_15"
         android:text="@string/search_button_text_5"/>
@@ -150,7 +150,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
-        android:theme="@style/AutoButton"
+        android:background="@drawable/btn_bottom_confirm_bg"
         android:gravity="center"
         android:text="@string/search_button_text_6"/>
         </LinearLayout>

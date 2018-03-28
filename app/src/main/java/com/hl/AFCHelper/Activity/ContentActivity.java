@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.UI.MyToolBar;
+import com.squareup.leakcanary.RefWatcher;
 //import com.squareup.leakcanary.RefWatcher;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +29,10 @@ import br.tiagohm.markdownview.css.styles.Github;
 @SuppressLint("JavascriptInterface")
 public class ContentActivity extends BaseActivity implements View.OnTouchListener {
     private MarkdownView mMarkdownView;
-    private List<String> imgUrlList = null;
-    private ImagePagerActivity.ImageSize imageSize;
+    private List<String> imgUrlList;
     private float x,y;
     private String content;
     private String title;
-
 
 
     //后退键监听
@@ -50,8 +50,12 @@ public class ContentActivity extends BaseActivity implements View.OnTouchListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //RefWatcher refWatcher = MyApplication.getRefWatcher(this);//
-        //refWatcher.watch(this);
+        content = null;
+        imgUrlList = null;
+        RefWatcher refWatcher = MyApplication.getRefWatcher(this);//
+        refWatcher.watch(this);
+
+
     }
 
     @Override
@@ -113,8 +117,7 @@ public class ContentActivity extends BaseActivity implements View.OnTouchListene
         toolbar.setTitle ("");
         textView.setText (title);
         setSupportActionBar(toolbar);
-        imageSize = new ImagePagerActivity.ImageSize(50, 50);
-        imgUrlList = extractMessageByRegular(content);
+        imgUrlList = extractMessageByRegular (content);
     }
 
     /**
@@ -191,7 +194,11 @@ public class ContentActivity extends BaseActivity implements View.OnTouchListene
         //查看图片url
         @JavascriptInterface
         public void click(String url){
-            ImagePagerActivity.startImagePagerActivity(getApplicationContext (), imgUrlList, getUrlPosition(url), imageSize);
+            Intent intent = new Intent(context, ImagePagerActivity.class);
+            intent.putStringArrayListExtra ("imgUrls", ( ArrayList<String> ) imgUrlList);
+            intent.putExtra("position", getUrlPosition (url));
+            startActivity(intent);
+
         }
     }
 }

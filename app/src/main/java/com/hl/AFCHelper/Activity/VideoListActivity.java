@@ -23,6 +23,7 @@ import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.UI.MyToolBar;
 import com.hl.AFCHelper.Until.SearchDataHelper;
+import com.squareup.leakcanary.RefWatcher;
 //import com.squareup.leakcanary.RefWatcher;
 
 import java.util.ArrayList;
@@ -80,9 +81,10 @@ public class VideoListActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+        System.gc ();
         super.onDestroy ();
-    //    RefWatcher refWatcher = MyApplication.getRefWatcher (this);//1
-      //  refWatcher.watch (this);
+        RefWatcher refWatcher = MyApplication.getRefWatcher (this);//1
+        refWatcher.watch (this);
     }
 
     @Override

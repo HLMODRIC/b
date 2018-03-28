@@ -73,7 +73,7 @@
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:src">@mipmap/item_list_right</item>
+        <item name="android:src">@drawable/item_list_right</item>
     </style>
 
     <style name="me_horizontal_view_style">
@@ -83,7 +83,7 @@
     </style>
 
     <style name="Splash">
-    <item name="android:windowBackground">@mipmap/splash</item>
+    <item name="android:windowBackground">@drawable/splash</item>
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowFullscreen">true</item>
     </style>

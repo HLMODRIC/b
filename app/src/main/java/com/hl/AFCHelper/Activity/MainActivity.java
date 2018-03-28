@@ -8,25 +8,21 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 
+import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.UI.MyToolBar;
-
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.hl.AFCHelper.Bean.db.DBManager;
 import com.hl.AFCHelper.Fragment.HomeTabFragment;
 import com.hl.AFCHelper.Fragment.SearchTabFragment;
 import com.hl.AFCHelper.Fragment.TheoryTabFragment;
 import com.hl.AFCHelper.Fragment.VideoTabFragment;
-import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.UI.BottomBar;
 import com.hl.AFCHelper.UI.BottomBarTab;
 import com.hl.AFCHelper.Until.FileUtils;
-//import com.squareup.leakcanary.RefWatcher;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.util.List;
 
@@ -89,10 +85,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         });
         //
         mBottomBar
-                .addItem(new BottomBarTab(this, R.mipmap.tab_home,getString(R.string.tab_menu_home)))
-                .addItem(new BottomBarTab (this, R.mipmap.tab_theory,getString(R.string.tab_menu_theory)))
-                .addItem(new BottomBarTab(this, R.mipmap.tab_video,getString(R.string.tab_menu_video)))
-                .addItem(new BottomBarTab(this, R.mipmap.tab_search,getString(R.string.tab_menu_search)));
+                .addItem(new BottomBarTab(this, R.drawable.tab_home,getString(R.string.tab_menu_home)))
+                .addItem(new BottomBarTab (this, R.drawable.tab_theory,getString(R.string.tab_menu_theory)))
+                .addItem(new BottomBarTab(this, R.drawable.tab_video,getString(R.string.tab_menu_video)))
+                .addItem(new BottomBarTab(this, R.drawable.tab_search,getString(R.string.tab_menu_search)));
 
         mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override
@@ -155,8 +151,9 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     protected void onDestroy() {
         super.onDestroy ();
-        //RefWatcher refWatcher = MyApplication.getRefWatcher (getApplicationContext ());
-        //refWatcher.watch (this);
+        System.gc ();
+        RefWatcher refWatcher = MyApplication.getRefWatcher (getApplicationContext ());
+        refWatcher.watch (this);
     }
 
     @Override
@@ -164,7 +161,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         return R.layout.ac_main;
     }
 
-    //后退键监听
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId ()) {
@@ -176,10 +173,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     }
 
 
-
+    //后退键监听
     //点击回退键的处理：判断Fragment栈中是否有Fragment
-//没，双击退出程序，否则像是Toast提示
-//有，popBackStack弹出栈
+    //没，双击退出程序，否则像是Toast提示
+    //有，popBackStack弹出栈
     @Override
     public void onBackPressed() {
         if (fManager.getBackStackEntryCount () == 0) {
@@ -211,50 +208,43 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
                 mToolbarTitle.setText (getResources ().getText (R.string.app_name));
                 if (mHomeTabFragment == null) {
                     mHomeTabFragment = new HomeTabFragment ();
-                    //DrawerLayout
-                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_UNLOCKED);
+                    mToolbar.setNavigationIcon (R.drawable.item_more);
                     transaction.add(R.id.main_content, mHomeTabFragment);
                 } else
-                    //DrawerLayout
-                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_UNLOCKED);
-
-                transaction.show(mHomeTabFragment);
+                    mToolbar.setNavigationIcon (R.drawable.item_more);
+                    transaction.show(mHomeTabFragment);
                 break;
             case SECOND:
+
                 mToolbarTitle.setText (getResources ().getText (R.string.tab_menu_theory));
                 if (mTheoryTabFragment == null) {
-                    //DrawerLayout
-                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    mToolbar.setNavigationIcon (null);
                     mTheoryTabFragment = new TheoryTabFragment ();
+
                     transaction.add(R.id.main_content, mTheoryTabFragment);
                 } else
-                    //DrawerLayout
-                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-
-                    transaction.show(mTheoryTabFragment);
+                    mToolbar.setNavigationIcon (null);
+                      transaction.show(mTheoryTabFragment);
                 break;
             case THIRD:
-                //DrawerLayout
-                mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                mToolbarTitle.setText (getResources ().getText (R.string.tab_menu_video));
+                mToolbar.setNavigationIcon (null);
+                 mToolbarTitle.setText (getResources ().getText (R.string.tab_menu_video));
                 if (mVideoTabFragment == null) {
                     mVideoTabFragment = new VideoTabFragment ();
                     transaction.add(R.id.main_content, mVideoTabFragment);
                 } else
-                    //DrawerLayout
-                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    mToolbar.setNavigationIcon (null);
                     transaction.show(mVideoTabFragment);
                 break;
             case FOUR:
+                mToolbar.setNavigationIcon (null);
                 mToolbarTitle.setText (getResources ().getText (R.string.tab_menu_search));
                 if (mSearchTabFragment == null) {
-                    //DrawerLayout
-                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    mToolbar.setNavigationIcon (null);
                     mSearchTabFragment = new SearchTabFragment ();
                     transaction.add(R.id.main_content, mSearchTabFragment);
                 } else
-                    //DrawerLayout
-                    mDrawerLayout.setDrawerLockMode (DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    mToolbar.setNavigationIcon (null);
                     transaction.show(mSearchTabFragment);
                 break;
 

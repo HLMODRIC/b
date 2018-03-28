@@ -22,6 +22,7 @@ import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.Until.GlideImageLoader;
 import com.hl.AFCHelper.Until.SearchDataHelper;
 //import com.squareup.leakcanary.RefWatcher;
+import com.squareup.leakcanary.RefWatcher;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -121,7 +122,7 @@ public class HomeTabFragment extends Fragment {
             @Override
             public void OnBannerClick(final int position) {
                 switch (position) {
-                    case 0:   //图片1
+                   /* case 0:   //图片1
                         ImagePagerActivity.startImagePagerActivity (getActivity (), ListPhotos, position, new ImagePagerActivity.ImageSize (50, 50));
 
                         break;
@@ -136,7 +137,7 @@ public class HomeTabFragment extends Fragment {
                         break;
                     case 4:        //图片5
                         ImagePagerActivity.startImagePagerActivity (getActivity (), ListPhotos, position, new ImagePagerActivity.ImageSize (50, 50));
-                        break;
+                        break;*/
                     default:
                         break;
                 }
@@ -193,8 +194,9 @@ public class HomeTabFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy ();
-        //RefWatcher refWatcher = MyApplication.getRefWatcher (getActivity ());
-        //refWatcher.watch (this);
+        System.gc ();
+        RefWatcher refWatcher = MyApplication.getRefWatcher (getActivity ());
+        refWatcher.watch (this);
     }
 
 

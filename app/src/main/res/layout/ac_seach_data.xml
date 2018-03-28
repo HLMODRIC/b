@@ -20,7 +20,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:background="#00000000"
-            android:src="@mipmap/item_back"/>
+            android:src="@drawable/item_back"/>
 
         <SearchView
             android:id="@+id/search_data_sv"

@@ -17,6 +17,7 @@ import com.hl.AFCHelper.MyApplication;
 import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.Bean.Data;
 import com.hl.AFCHelper.Bean.db.MyDBOpenHelper;
+import com.squareup.leakcanary.RefWatcher;
 //import com.squareup.leakcanary.RefWatcher;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +46,11 @@ public class TheoryListFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-       // RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
-        //refWatcher.watch(this);
+        mData.clear ();
+        mData = null;
+        System.gc ();
+        RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
     /**
      * 初始化数据

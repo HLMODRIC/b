@@ -15,6 +15,7 @@ import com.hl.AFCHelper.R;
 import com.hl.AFCHelper.Until.SearchDataHelper;
 import com.hl.AFCHelper.Bean.Data;
 import com.hl.AFCHelper.Bean.db.MyDBOpenHelper;
+import com.squareup.leakcanary.RefWatcher;
 //import com.squareup.leakcanary.RefWatcher;
 import java.util.ArrayList;
 
@@ -98,8 +99,9 @@ public class SearchTabFragment extends Fragment {
 
     @Override public void onDestroy() {
         super.onDestroy();
-        //RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
-       // refWatcher.watch(this);
+        System.gc ();
+        RefWatcher refWatcher = MyApplication.getRefWatcher(getActivity());
+       refWatcher.watch(this);
     }
 
     private void getData(String sql) {

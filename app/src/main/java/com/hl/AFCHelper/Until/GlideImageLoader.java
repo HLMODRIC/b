@@ -20,7 +20,7 @@ public class GlideImageLoader extends ImageLoader {
         //Glide 加载图片简单用法
         RequestOptions options = new RequestOptions ()
                 .diskCacheStrategy (DiskCacheStrategy.ALL)
-                .error(R.mipmap.load_error);
+                .error(R.drawable.load_error);
 
         Glide.with(context)
                 .load(path)
