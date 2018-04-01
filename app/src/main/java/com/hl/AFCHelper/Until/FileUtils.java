@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -103,7 +104,13 @@ public class FileUtils {
 
     private void copyAssetsToDst(Context context, String srcPath, String dstPath) {
         try {
+            int total = 0;
             String fileNames[] = context.getAssets().list(srcPath);
+            for (int x = 0; x < fileNames.length; x++){
+                InputStream is = context.getAssets().open(fileNames[x]);
+                 total = total + is.available ();
+                Log.d ("downlowd","is:         "+String.valueOf (total));
+            }
             if (fileNames.length > 0) {
                 File file = new File(Environment.getExternalStorageDirectory(), dstPath);
                 if (!file.exists()) file.mkdirs();
@@ -117,11 +124,13 @@ public class FileUtils {
             } else {
                 File outFile = new File(Environment.getExternalStorageDirectory(), dstPath);
                 InputStream is = context.getAssets().open(srcPath);
-                FileOutputStream fos = new FileOutputStream(outFile);
-                byte[] buffer = new byte[1024];
+                 FileOutputStream fos = new FileOutputStream(outFile);
+                byte[] buffer = new byte[1024 * 4];
                 int byteCount;
                 while ((byteCount = is.read(buffer)) != -1) {
                     fos.write(buffer, 0, byteCount);
+
+
                 }
                 fos.flush();
                 is.close();

@@ -43,7 +43,7 @@ public class ImagePagerActivity extends Activity {
 
     private List<View> guideViewList = new ArrayList<View>();
 
-    private int startPos;
+    private int     startPos;
     private ArrayList<String> imgUrls;
 
 

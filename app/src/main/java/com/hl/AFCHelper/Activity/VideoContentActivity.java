@@ -28,7 +28,6 @@ public class VideoContentActivity extends BaseActivity {
     private String content;
     private String title;
     private String imageUrl;
-    private String videoUrl;
 
     @Override
     protected int setLayoutId() {
@@ -44,7 +43,7 @@ public class VideoContentActivity extends BaseActivity {
             content = bundle.getString("data");
             title = bundle.getString ("title");
             imageUrl = bundle.getString ("imageUrl");
-            videoUrl = bundle.getString ("videoUrl");
+            String videoUrl = bundle.getString ("videoUrl");
             bundle.clear ();
         }
     }

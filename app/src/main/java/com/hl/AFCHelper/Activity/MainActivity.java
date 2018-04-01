@@ -85,10 +85,10 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         });
         //
         mBottomBar
-                .addItem(new BottomBarTab(this, R.drawable.tab_home,getString(R.string.tab_menu_home)))
-                .addItem(new BottomBarTab (this, R.drawable.tab_theory,getString(R.string.tab_menu_theory)))
-                .addItem(new BottomBarTab(this, R.drawable.tab_video,getString(R.string.tab_menu_video)))
-                .addItem(new BottomBarTab(this, R.drawable.tab_search,getString(R.string.tab_menu_search)));
+                    .addItem(new BottomBarTab(this, R.drawable.tab_home,getString(R.string.tab_menu_home)))
+                    .addItem(new BottomBarTab (this, R.drawable.tab_theory,getString(R.string.tab_menu_theory)))
+                    .addItem(new BottomBarTab(this, R.drawable.tab_video,getString(R.string.tab_menu_video)))
+                    .addItem(new BottomBarTab(this, R.drawable.tab_search,getString(R.string.tab_menu_search)));
 
         mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override
